@@ -40,7 +40,7 @@ process.on('uncaughtException', (err: Error) => {
 
   const server = container.get<ExpressApplication>('ExpressApplication');
     
-  // Assuming container binds this
+  
   const port = process.env.PORT || config.API_PORT;
   
   const appServer = server.listen(port, () => 
@@ -48,7 +48,7 @@ process.on('uncaughtException', (err: Error) => {
   );
 
   process.on('unhandledRejection', (err: any) => {
-    console.error('Unhandled Rejection! Shutting down...');
+    console.error('Unhandled Rejection! Shutting down...', err);
     appServer.close(() => process.exit(1));
   });
 })();

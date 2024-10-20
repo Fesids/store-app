@@ -13,7 +13,15 @@ import sendError from './utils/sendError';
 import { errorHandler } from './interfaces/http/middlewares/ErrorHandler';
 import config from "./config/main";
 import { applicationContainerModule } from './application/container';
+
+// CONTROLLERS
+
 import './interfaces/http/controllers/ApplicationController'
+import './interfaces/http/controllers/UserController'
+import './interfaces/http/controllers/CommonController'
+import './interfaces/http/controllers/AuthController'
+
+// *** //
 import { infraestructureContainerModule } from './infra/container';
 /*
 const app = express();
