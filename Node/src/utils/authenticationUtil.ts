@@ -6,7 +6,8 @@ import config from '../config/main';
 interface JwtPayloadExtended extends JwtPayload {
     guid: string;
     firstName: string;
-    lastName: string
+    lastName: string;
+    email: string;
 }
 
 const validate = {
@@ -38,4 +39,42 @@ const verifyUserPassword = async (
     hashPassword: string
 ): Promise<boolean> => {
     return await bcrypt.compare(plainTextPassword, hashPassword);
+}
+
+const getJwtToken = (jwtPayload: JwtPayloadExtended): string => {
+    return jwt.sign(
+        {
+            guid: jwtPayload.guid,
+            firstName: jwtPayload.firstName,
+            lastName: jwtPayload.lastName,
+            email: jwtPayload.email
+        
+        },
+        config.JWT_SECRET as string,
+        {expiresIn: config.JWT_EXPIRY}
+    )
+}
+
+const saveCookie = (
+    res: Response,
+    key: string,
+    value: string
+): void => {
+    res.cookie(key, value, {httpOnly: true, maxAge: config.JWT_EXPIRY * 100});
+}
+
+const verifyJwtToken = (token: string): JwtPayloadExtended => {
+    return jwt.verify(token, config.JWT_SECRET as string) as JwtPayloadExtended;
+}
+
+export {
+    validate,
+    JwtPayloadExtended,
+    isAvailable,
+    getHashPassword,
+    verifyUserPassword,
+    getJwtToken,
+    saveCookie,
+    verifyJwtToken
+    
 }
