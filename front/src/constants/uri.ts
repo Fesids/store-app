@@ -1,4 +1,4 @@
-export const mainURI = `http://${location.hostname}:8080/api`
+export const mainURI = `http://${location.hostname}:3000/api/v1`
 
 /*@Component({})
 export class UiPaginationComponent {

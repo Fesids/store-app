@@ -37,7 +37,7 @@ export const login = createAsyncThunk(
     'auth/login',
     async (credentials: {email: string; password: string}, {rejectWithValue}) => {
         try{
-            const response = await axiosInstance.post('/login', credentials);
+            const response = await axiosInstance.post('/auth/login', credentials);
             const {data, message, status} = response.data;
 
             if (status !== '000') throw new Error(message);
@@ -60,7 +60,7 @@ export const signup = createAsyncThunk(
 
         try{
 
-            const response = await axiosInstance.post('/signup', userDetails);
+            const response = await axiosInstance.post('/auth/signup', userDetails);
             const {status, message} = response.data;
 
             if(status !== '000') throw new Error(message);
