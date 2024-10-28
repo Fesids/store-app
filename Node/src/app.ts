@@ -13,7 +13,7 @@ import sendError from './utils/sendError';
 import { errorHandler } from './interfaces/http/middlewares/ErrorHandler';
 import config from "./config/main";
 import { applicationContainerModule } from './application/container';
-import cors from "cors"
+
 // CONTROLLERS
 
 import './interfaces/http/controllers/ApplicationController'
@@ -84,7 +84,6 @@ const initialise = async () => {
     app.use(cookieParser());
     app.use(express.json({ limit: '10kb' }));
     app.use(limiter);
-    app.use(cors())
 
     // CORS Handling
     app.use((req: Request, res: Response, next: NextFunction) => {

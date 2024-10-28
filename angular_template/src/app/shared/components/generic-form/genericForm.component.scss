@@ -1,0 +1,34 @@
+.fields-wrapper{
+    //border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+   
+
+    .fields-container{
+        display: flex;
+        flex-direction: column;
+        column-gap: 5px;
+        row-gap: 5px;
+
+        .field-label{
+            font-weight: bold;
+            margin-top: 3px;
+        }
+
+        .field-input{
+            height: 27px;
+        }
+
+        
+    }
+
+    &__button{
+        background-color: #3f00ff ;
+        border: none;
+        color: whitesmoke;
+        height: 47px;
+        width: 100%;
+        border-radius: 6px;
+        margin-top: 15px;
+    }
+}

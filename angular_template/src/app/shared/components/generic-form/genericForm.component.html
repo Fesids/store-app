@@ -1,0 +1,20 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="fields-wrapper">
+    <div *ngFor="let field of formFields" class="fields-container">
+      <label [for]="field.name" class="field-label">{{ field.label }}</label>
+      <input
+        [id]="field.name"
+        [type]="field.type || 'text'"
+        [formControlName]="field.name"
+        [placeholder]="field.placeholder"
+        class="field-input"
+      />
+      <div *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched">
+        <small *ngIf="form.get(field.name)?.errors?.['required']">This field is required.</small>
+        <small *ngIf="form.get(field.name)?.errors?.['minlength']">
+          Minimum length is {{ field.minLength }} characters.
+        </small>
+      </div>
+    </div>
+    <button type="submit" class="fields-wrapper__button">{{ submitButtonLabel }}</button>
+  </form>
+  
