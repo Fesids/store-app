@@ -25,7 +25,11 @@ export class GenericFormComponent implements OnInit{
 
     private buildFormControls(): { [key: string]: any } {
         return this.formFields.reduce((acc: { [key: string]: any }, field: FormField) => {
-          const validators: ValidatorFn[] = [Validators.required];
+          const validators: ValidatorFn[] = [];
+          if (field.required) {
+            validators.push(Validators.required);
+          }
+
           if (field.minLength) {
             validators.push(Validators.minLength(field.minLength));
           }

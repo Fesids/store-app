@@ -25,7 +25,7 @@ export class SignupPageComponent implements OnInit{
     constructor( private router: Router, private store: Store, private authService: AuthService){}
 
     signupFields: FormField[] = [
-        {name: 'firstName', label: 'First Name', placeholder: 'Enter your name', type: 'text' },
+        {name: 'firstName', label: 'First Name', placeholder: 'Enter your name', type: 'text', required: true },
         {name: 'lastName', label: 'Last Name', placeholder: 'Enter your last name', type: 'text'},
         {name: 'email', label: 'Email', placeholder: 'Enter your email', type: 'email' },
         {name: 'password', label: 'Password', placeholder: 'Enter your password', type: 'password' },

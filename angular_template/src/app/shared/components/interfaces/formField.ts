@@ -4,4 +4,5 @@ export interface FormField {
     placeholder: string;
     type?: string;
     minLength?: number;
+    required?: boolean; 
   }
