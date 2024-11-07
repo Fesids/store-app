@@ -1,7 +1,10 @@
-<app-title-component title="Login" />
+<div class="app-login-page">
+  <app-title-component title="Login" />
 
-<app-generic-form 
-[formFields]="loginFields" 
-submitButtonLabel="Login" 
-(formSubmitted)="onSubmit($event)">
-</app-generic-form>
+    <app-generic-form 
+    [formFields]="loginFields" 
+    submitButtonLabel="Login" 
+    (formSubmitted)="onSubmit($event)">
+    </app-generic-form>
+    <p>Already have an account? <span (click)="onRedirect()">Signup</span> </p>
+</div>

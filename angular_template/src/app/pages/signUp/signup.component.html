@@ -1,11 +1,13 @@
+<div class="app-signup-page">
+    <app-title-component title="Signup"/>
 
+    <app-generic-form
+        [formFields]="signupFields"
+        submitButtonLabel="Register"
+        (formSubmitted)="onSubmit($event)"
+    >
 
-<app-title-component title="Signup"/>
+    </app-generic-form>
+    <p>Already have an account? <span (click)="onRedirect()">Login</span> </p>
+</div>
 
-<app-generic-form
-    [formFields]="signupFields"
-    submitButtonLabel="Register"
-    (formSubmitted)="onSubmit($event)"
->
-
-</app-generic-form>

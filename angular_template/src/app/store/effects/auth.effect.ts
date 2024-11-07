@@ -19,14 +19,7 @@ export class AuthEffects {
   // **Login Effect**
   login$ = createEffect((): Observable<Action> =>
     this.actions$.pipe(
-      /*ofType(AuthActions.loginRequested),
-      switchMap(({ credentials }) =>
-        this.apiService.post<any, any>('/auth/login', credentials).pipe(
-          map((response) => AuthActions.loginSuccess({ response })),
-          catchError((error) => of(AuthActions.loginFailure({ error: error.message })))
-        )
-      )*/
-
+    
         ofType(AuthActions.loginRequested),
         mergeMap(action => 
           this.authService.loginUser(action.credentials)
@@ -38,16 +31,9 @@ export class AuthEffects {
   );
 
   // **Signup Effect**
-  signup$ = createEffect((): Observable<Action> =>
+  /*signup$ = createEffect((): Observable<Action> =>
     this.actions$.pipe(
-    /*  ofType(AuthActions.signupRequested),
-      switchMap(({ userData }) =>
-        this.apiService.post<any, any>('/auth/signup', userData).pipe(
-          map((response) => AuthActions.signupSuccess({ response })),
-          catchError((error) => of(AuthActions.signupFailure({ error: error.message })))
-        )
-      )
-    )*/
+    
       ofType(AuthActions.loginRequested),
       mergeMap(action => 
         this.authService.loginUser(action.credentials)
@@ -55,5 +41,5 @@ export class AuthEffects {
           map((data: any)=> AuthActions.loginSuccess({response: data}))
         )
       ))
-  );
+  );*/
 }

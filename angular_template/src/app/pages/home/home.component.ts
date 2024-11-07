@@ -2,21 +2,34 @@ import { Component, inject, Inject, Input, OnDestroy, OnInit } from "@angular/co
 import { ApiService } from "../../http/api.service";
 import { catchError, tap } from "rxjs";
 import { AuthService } from "../../services/auth.service";
+import { BoxComponent } from "../../shared/components/boxComponent/box.component";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 
 
 @Component({
+    standalone: true,
     styleUrl:"./home.component.scss",
-    templateUrl: "./home.component.html"
+    templateUrl: "./home.component.html",
+    imports: [BoxComponent]
 })
 export class HomePageComponent implements OnInit, OnDestroy{
 
     @Input() title = "teste home";
 
-    
-   
-    constructor(private readonly apiService: ApiService, private readonly authService: AuthService){
+    constructor(private dailog: MatDialog){}
 
+    onOpenModal(){
+      this.dailog.open(BoxComponent, {
+        data: {
+          title: 'Box Modal',
+          description: 'This is a description for the Box modal',
+          imageUrl: 'https://example.com/image.jpg',
+          errorMessage: 'An error has occurred'
+        },
+        width: '1500px'
+      })
     }
+
     ngOnDestroy(): void {
         
         //throw new Error("Method not implemented.");
@@ -34,7 +47,7 @@ export class HomePageComponent implements OnInit, OnDestroy{
           next: (data) => console.log('Success:', data),
           error: (err) => console.error('Error:', err),
           complete: () => console.log('Request complete.')
-        });*/
+        });
         this.authService.loginUser({email: "testehash@gmail.com", password: "67890000"})
         .pipe(
             tap(data => console.log('Response:', data))
@@ -43,7 +56,7 @@ export class HomePageComponent implements OnInit, OnDestroy{
             next: (data) => console.log('Success:', data),
             error: (err) => console.error('Error:', err),
             complete: () => console.log('Request complete.')
-          });
+          });*/
         ///throw new Error("Method not implemented.");
     }
 }

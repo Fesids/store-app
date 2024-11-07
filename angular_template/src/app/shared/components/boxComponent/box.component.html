@@ -1,0 +1,18 @@
+<mat-card class="box-container" [ngClass]="data.customClass">
+    <mat-card-header *ngIf="data.title">
+      <mat-card-title>{{ data.title }}</mat-card-title>
+    </mat-card-header>
+  
+    <img *ngIf="data.imageUrl" [src]="data.imageUrl" alt="{{ data.title }}" class="box-image" />
+  
+    <mat-card-content>
+      <p *ngIf="data.description">{{ data.description }}</p>
+      <ng-content></ng-content> 
+    </mat-card-content>
+  
+    <mat-card-footer >
+      <button *ngIf="data.showError" mat-button (click)="openErrorDialog()">Mostar erro</button>
+      <button mat-button (click)="closeDialog()">fechar</button>
+    </mat-card-footer>
+  </mat-card>
+  

@@ -1,5 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="fields-wrapper">
     <div *ngFor="let field of formFields" class="fields-container">
+      <div class="field">
       <label [for]="field.name" class="field-label">{{ field.label }}</label>
       <input
         [id]="field.name"
@@ -8,6 +9,7 @@
         [placeholder]="field.placeholder"
         class="field-input"
       />
+      </div>
       <div *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched">
         <small *ngIf="form.get(field.name)?.errors?.['required']">This field is required.</small>
         <small *ngIf="form.get(field.name)?.errors?.['minlength']">

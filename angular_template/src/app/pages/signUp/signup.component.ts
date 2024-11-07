@@ -37,6 +37,10 @@ export class SignupPageComponent implements OnInit{
         ///throw new Error("Method not implemented.");
     }
 
+    onRedirect(){
+      this.router.navigate(['/login'])
+    }
+
     onSubmit(data:any): void{
         console.log("Ok signp ", data);
         this.authService.signupUser(data)

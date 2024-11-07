@@ -1,0 +1,30 @@
+.page-title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 57px;
+    //border: 2px solid red;
+
+    h1{
+        font-size: 47px;
+    }
+}
+
+@media(max-width: 767px){
+    .page-title-wrapper{
+        
+        h1{
+            font-size: 32px;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px){
+    .page-title-wrapper{
+        
+        h1{
+            font-size: 41px;
+        }
+    }
+}

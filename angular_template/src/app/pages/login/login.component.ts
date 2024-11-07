@@ -5,6 +5,9 @@ import { AuthService } from "../../services/auth.service";
 import { tap } from "rxjs";
 import { setTokenCookie } from "../../shared/utils/setCookie";
 import { PageTitleComponent } from "../../shared/components/page-title/page-title.component";
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { AppState } from "../../store/states/app.state";
 
 
 @Component({
@@ -17,22 +20,26 @@ import { PageTitleComponent } from "../../shared/components/page-title/page-titl
 })
 export class LoginPageComponent implements OnInit{
 
-    constructor(private readonly authService: AuthService){}
+    constructor(private readonly authService: AuthService, private router: Router){}
 
     loginFields: FormField[] = [
         { name: 'email', label: 'Email', placeholder: 'Enter your email', type: 'email' },
         { name: 'password', label: 'Password', placeholder: 'Enter your password', type: 'password' },
       ];
+
+      onRedirect(){
+        this.router.navigate(['/signup'])
+      }
     
       onSubmit(data: any) {
         console.log('Login data:', data);
         this.authService.loginUser(data)
       .pipe(
-          tap(data => console.log('Response:', data))
+          tap(data => console.log('Response:', data.data))
          
         )
         .subscribe({
-          next: (data) => setTokenCookie(data.data?.data?.token || ""),
+          next: (data) => setTokenCookie(data.data?.token || ""),
           error: (err) => console.error('Error:', err),
           complete: () => console.log('Request complete.')
         });

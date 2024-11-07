@@ -8,10 +8,10 @@ export interface LoggedUser {
 
 
 export interface AuthResponse {
-    data: {
-        loggedUser: LoggedUser;
-        token: string;
-    }
+    
+    loggedUser: LoggedUser;
+    token: string;
+
 }
 
 export interface LoginUserData{

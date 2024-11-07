@@ -41,8 +41,8 @@ export const authReducer = createReducer(
   })),
   on(AuthActions.loginSuccess, (state, { response }) => ({
     ...state,
-    user: response.data.loggedUser,
-    token: response.data.token,
+    user: response.loggedUser,
+    token: response.token,
     loading: false,
   })),
   on(AuthActions.loginFailure, (state, { error }) => ({
@@ -59,8 +59,8 @@ export const authReducer = createReducer(
   })),
   on(AuthActions.signupSuccess, (state, { response }) => ({
     ...state,
-    user: response.data.loggedUser,
-    token: response.data.token,
+    user: response.loggedUser,
+    token: response.token,
     loading: false,
   })),
   on(AuthActions.signupFailure, (state, { error }) => ({

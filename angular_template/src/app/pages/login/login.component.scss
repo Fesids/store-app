@@ -1,0 +1,15 @@
+.app-login-page{
+   
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p{
+        span{
+            color: #3f00ff;
+            font-weight: bold;
+        }
+    }
+}
