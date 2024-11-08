@@ -4,13 +4,14 @@ import { catchError, tap } from "rxjs";
 import { AuthService } from "../../services/auth.service";
 import { BoxComponent } from "../../shared/components/boxComponent/box.component";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { HeaderComponent } from "../../shared/layout/header.component";
 
 
 @Component({
     standalone: true,
     styleUrl:"./home.component.scss",
     templateUrl: "./home.component.html",
-    imports: [BoxComponent]
+    imports: [BoxComponent, HeaderComponent]
 })
 export class HomePageComponent implements OnInit, OnDestroy{
 
@@ -23,8 +24,9 @@ export class HomePageComponent implements OnInit, OnDestroy{
         data: {
           title: 'Box Modal',
           description: 'This is a description for the Box modal',
-          imageUrl: 'https://example.com/image.jpg',
-          errorMessage: 'An error has occurred'
+          imageUrl: 'https://example.com/.jpg',
+          errorMessage: 'An error has occurred',
+          showError: 'oi'
         },
         width: '1500px'
       })

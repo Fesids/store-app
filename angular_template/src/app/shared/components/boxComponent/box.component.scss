@@ -1,5 +1,20 @@
+.box-wrapper {
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px); /* Adds blur effect */
+  z-index: 1000;
+}
 .box-container {
-    margin: 16px;
+    background-color: white;
+    margin: 0;
+    width: 450px;
     border-radius: 8px;
     //background-color: red;
   }
