@@ -12,7 +12,7 @@ import { TYPES } from '../../../constants/types';
 import { ok } from '../processors/response';
 
 @controller('/api/v1/application')
-export class TaskController implements interfaces.Controller{
+export class AppController implements interfaces.Controller{
 
     @httpGet('/')
     public getExample(@request() req: Request, @response() res: Response): void {
