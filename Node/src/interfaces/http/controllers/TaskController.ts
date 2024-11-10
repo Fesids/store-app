@@ -78,6 +78,17 @@ export class TaskController implements interfaces.Controller{
             next(error);
         }
     }
+
+    
+    @httpGet("/:id")
+    async getTaskById(@request() req: Request, @response() res: Response, next: NextFunction) {
+        try {
+            const task = await this.service.getTaskById(req.params.id);
+            return res.json(ok(task, `task with ${req.params.id} retrived successfully`))
+        } catch (error) {
+            next(error);
+        }
+    }
         
 
 }
