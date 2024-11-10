@@ -48,7 +48,7 @@ export class Task extends Entity<ITaskProps> implements IAggregateRoot{
         return this._completed;
     }
 
-    get employess(){
+    get employees(){
         return this._employees;
     }
 

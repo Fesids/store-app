@@ -28,7 +28,7 @@ export class TaskDataMapper implements IDataMapper<Task>{
             title: entity.title,
             description: entity.description,
             completed: entity.completed,
-            employees: entity.employess,
+            employees: entity.employees,
             createdBy: entity.createdBy,
             departments: entity.departments,
             createdAt: entity.createdAt,

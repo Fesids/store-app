@@ -3,6 +3,7 @@ import { TYPES } from "../../constants/types";
 import { ITaskRepository } from "../../domain/task/ITaskRepository";
 import { TaskDto } from "./dtos/TaskDto";
 import { Task } from "../../domain/task/Task";
+import { AppError } from "../../interfaces/http/middlewares/ErrorHandler";
 
 
 @injectable()
@@ -22,6 +23,24 @@ export class TaskApplication{
         
        
         await this.taskrepository.save(task);
+
+    }
+
+    async getTasksByCriterias(criteria: Record<string, any>): Promise<any> {
+
+        const tasks = await this.taskrepository.findAllByParam(criteria);
+
+        return tasks;
+    }
+
+    async getTaskById(id: string): Promise<any | null>{
+
+        const task = await this.taskrepository.findOneById(id);
+
+        if(!task) throw new AppError(`Task with id ${id} couldn´t be retrieved`, 404);
+
+        return new TaskDto(task.guid, task.title, task.description, task.completed, task.employees, task.createdBy, task.departments, task.createdAt, task.updatedAt);
+
 
     }
 
