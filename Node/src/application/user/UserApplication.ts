@@ -16,7 +16,7 @@ export class UserApplication {
 
     async getAllUsers(): Promise<any[]> {
         const users = await this.userRepository.findAll();
-        console.log(users)
+        //console.log(users)
         return users.map(user => new UserDto(user.guid, user.email, user.firstname, user.lastname, user.password));
     }
 

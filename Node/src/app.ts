@@ -16,11 +16,13 @@ import { applicationContainerModule } from './application/container';
 
 // CONTROLLERS
 
-import './interfaces/http/controllers/ApplicationController'
+/*import './interfaces/http/controllers/ApplicationController'
 import './interfaces/http/controllers/UserController'
 import './interfaces/http/controllers/CommonController'
 import './interfaces/http/controllers/AuthController'
-import './interfaces/http/controllers/TaskController'
+import './interfaces/http/controllers/TaskController'*/
+
+import './interfaces/http/controllers'
 
 // *** //
 import { infraestructureContainerModule } from './infra/container';

@@ -19,7 +19,9 @@ import { TaskRepository } from "./repositories/TaskRepository";
 export const infraestructureContainerModule = new AsyncContainerModule(async(bind: interfaces.Bind) =>{
     const db: Db = await createMongodbConnection(config.MONGODB_URI, {});
     bind<Db>(TYPES.Db).toConstantValue(db);
+
     bind<IDataMapper<Application>>(TYPES.ApplicationDataMapper).to(ApplicationDataMapper);
+    
     bind<IDataMapper<User>>(TYPES.UserDataMapper).to(UserDataMapper);
     bind<IUserRepository>(TYPES.UserRepository).to(UserRepository);
 

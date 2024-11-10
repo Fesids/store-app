@@ -46,7 +46,7 @@ export class Repository<IDomainEntity> implements IRepository<IDomainEntity> {
         return !!dbResult;
     }
 
-    async save(entity: IDomainEntity): Promise<void> {
+    /*async save(entity: IDomainEntity): Promise<void> {
         const guid = (entity as any).guid;
         const exists = await this.doesExists(guid);
 
@@ -55,7 +55,26 @@ export class Repository<IDomainEntity> implements IRepository<IDomainEntity> {
             return;
         }
         await this.collectionInstance.replaceOne({guid}, entity as any)
-    }
+    }*/
+
+        async save(entity: IDomainEntity): Promise<void> {
+            try {
+                const guid = (entity as any).guid;
+                const exists = await this.doesExists(guid);
+        
+                if (!exists) {
+                    await this.collectionInstance.insertOne(this.dataMapper.toDalEntity(entity));
+                    return;
+                }
+                
+                await this.collectionInstance.replaceOne({ guid }, entity as any);
+            } catch (error) {
+                console.error("An error occurred while saving the entity:", error);
+                // Handle the error as needed, e.g., throw a custom error or perform cleanup
+                throw error;
+            }
+        }
+        
     
     async delete(id: string): Promise<void> {
         await this.collectionInstance.deleteOne({guid: id})
