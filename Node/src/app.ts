@@ -9,7 +9,7 @@ import bodyParser from 'body-parser';
 import {Container} from 'inversify';
 import {InversifyExpressServer} from 'inversify-express-utils'
 
-import sendError from './utils/sendError';
+import sendError from './shared/sendError';
 import { errorHandler } from './interfaces/http/middlewares/ErrorHandler';
 import config from "./config/main";
 import { applicationContainerModule } from './application/container';

@@ -7,7 +7,8 @@ import { ITaskRepository } from "../../../domain/task/ITaskRepository";
 import { Task } from "../../../domain/task/Task";
 import { ok } from "../processors/response";
 import { ParsedQs } from 'qs';
-import {removeUnderscores} from '../../../utils/removeUnderscore'
+import {removeUnderscores} from '../../../shared/removeUnderscore'
+import { Pagination } from "../../../shared/pagination/Pagination";
 
 
 
@@ -54,10 +55,17 @@ export class TaskController implements interfaces.Controller{
     }*/
 
     @httpGet('')
-    async getTasksByDp(@request() req: Request, @response() res: Response, next: NextFunction) {
+    async getTasksByCriteria(@request() req: Request, @response() res: Response, next: NextFunction) {
         try {
             const criteria: Record<string, any> = { ...req.query };
+            const page = parseInt(req.query.page as string) || 1;
+            const pageSize = parseInt(req.query.pageSize as string) || 10;
+            const pagination: Pagination = {page, pageSize};
+
+            delete criteria.page;
+            delete criteria.pageSize;
     
+
             if (criteria.departments) {
                 if (typeof criteria.departments === 'string') {
                     criteria.departments = [criteria.departments];
@@ -72,7 +80,7 @@ export class TaskController implements interfaces.Controller{
                 criteria.completed = criteria.completed === 'true';
             }
     
-            const tasks = await this.service.getTasksByCriterias(criteria);
+            const tasks = await this.service.getTasksByCriterias(criteria ,pagination);
             return res.json(ok(removeUnderscores(tasks), 'Success'));
         } catch (error) {
             next(error);

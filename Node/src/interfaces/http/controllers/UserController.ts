@@ -7,6 +7,8 @@ import { TYPES } from "../../../constants/types";
 import { UserApplication } from "../../../application/user/UserApplication";
 import { json } from "body-parser";
 import { ok } from "../processors/response";
+import { Pagination } from "../../../shared/pagination/Pagination";
+import { removeUnderscores } from "../../../shared/removeUnderscore";
 
 
 @controller('/api/v1/users')
@@ -24,6 +26,20 @@ export class UserController implements interfaces.Controller{
     }
 
     @httpGet('/')
+    async getPaginetedUsers(@request() req: Request, @response() res: Response){
+        const criteria: Record<string, any> = { ...req.query };
+        const page = parseInt(req.query.page as string) || 1;
+        const pageSize = parseInt(req.query.pageSize as string) || 10;
+        const pagination: Pagination = {page, pageSize};
+
+        delete criteria.page;
+        delete criteria.pageSize;
+
+        const users = await this.service.getPaginetedUsers(criteria ,pagination);
+        return res.json(ok(removeUnderscores(users), 'Success'));
+    }
+
+    @httpGet('/all')
     async getAllUsers(@request() req: Request, @response() res: Response) {
         const users = await this.service.getAllUsers();
 

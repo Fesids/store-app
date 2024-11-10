@@ -6,7 +6,7 @@ import { SignUpDto } from "./dtos/SignupDto";
 import { loginUserDto } from "./dtos/LoginDto";
 import { AppError } from "../../interfaces/http/middlewares/ErrorHandler";
 import { UserDto } from "../user/dtos/UserDto";
-import { getHashPassword, verifyUserPassword, JwtPayloadExtended, getJwtToken } from "../../utils/authenticationUtil";
+import { getHashPassword, verifyUserPassword, JwtPayloadExtended, getJwtToken } from "../../shared/authenticationUtil";
 
 
 @injectable()

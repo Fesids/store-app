@@ -2,6 +2,8 @@ import { injectable, unmanaged } from "inversify";
 import { IRepository } from "../../core/IRepository";
 import { Collection } from "mongodb";
 import { IDataMapper } from "../../core/IDataMapper";
+import { Pagination } from "../../shared/pagination/Pagination";
+import { getPaginationOptions, getTotalPages } from "../../shared/pagination/PaginationHelper";
 
 
 @injectable()
@@ -19,18 +21,41 @@ export class Repository<IDomainEntity> implements IRepository<IDomainEntity> {
         this.dataMapper = dataMapper;
     }
 
-    async findAllByParam(params: Record<string, any>): Promise<IDomainEntity | any> {
+    async findAllByParam(params: Record<string, any>, pagination?: Pagination): Promise<IDomainEntity | any> {
+
+        const { skip, limit } = getPaginationOptions(pagination);
        
         const query = Object.fromEntries(
             Object.entries(params).map(([key, value]) => 
                 Array.isArray(value) ? [key, { $in: value }] : [key, value]
             )
         );
-    
-        const dbResult = await this.collectionInstance.find(query).toArray();
+
+        
+        /*const dbResult = await this.collectionInstance.find(query).toArray();
         if (!dbResult) return null;
         
-        return dbResult.map(item => this.dataMapper.toDomain(item));
+        return dbResult.map(item => this.dataMapper.toDomain(item));*/
+
+
+        const [total, dbResult] = await Promise.all([
+            this.collectionInstance.countDocuments(query), 
+            this.collectionInstance.find(query)
+                .skip(skip) 
+                .limit(limit) 
+                .toArray(),
+        ]);
+
+        const totalPages = getTotalPages(total, limit);
+
+        return {
+            data: dbResult.map(item => this.dataMapper.toDomain(item)),
+            total,
+            page: pagination?.page || 1,
+            pageSize: pagination?.pageSize || 10,
+            totalPages,
+        };
+    
     }
     
 

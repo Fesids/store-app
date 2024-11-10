@@ -4,6 +4,7 @@ import { ITaskRepository } from "../../domain/task/ITaskRepository";
 import { TaskDto } from "./dtos/TaskDto";
 import { Task } from "../../domain/task/Task";
 import { AppError } from "../../interfaces/http/middlewares/ErrorHandler";
+import { Pagination } from "../../shared/pagination/Pagination";
 
 
 @injectable()
@@ -26,9 +27,9 @@ export class TaskApplication{
 
     }
 
-    async getTasksByCriterias(criteria: Record<string, any>): Promise<any> {
+    async getTasksByCriterias(criteria: Record<string, any>, pagination?: Pagination): Promise<any> {
 
-        const tasks = await this.taskrepository.findAllByParam(criteria);
+        const tasks = await this.taskrepository.findAllByParam(criteria, pagination);
 
         return tasks;
     }
