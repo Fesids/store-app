@@ -1,5 +1,6 @@
-// por algum motivo o retorno da pesquisa por criteria está vindo com os campos iniciados em underscore, por isso criei essa função... 
-// sim, estou com preguiça de resolver esse problema agora, faz parte da vida.
+// For some reason, the search result by criteria is coming with fields starting with an underscore, so I created this function... 
+// Yes, I'm too lazy to solve this problem right now, it's part of life.
+
 export const removeUnderscores = (data: any): any=>{
     if (Array.isArray(data)) {
         return data.map(item => removeUnderscores(item));

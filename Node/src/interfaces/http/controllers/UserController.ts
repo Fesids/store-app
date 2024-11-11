@@ -1,12 +1,12 @@
 import { inject, } from "inversify";
-import {interfaces} from "inversify-express-utils";
+import {httpPut, interfaces} from "inversify-express-utils";
 import { controller, httpGet, request, response, httpPost } from "inversify-express-utils";
-import {Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 
 import { TYPES } from "../../../constants/types";
 import { UserApplication } from "../../../application/user/UserApplication";
 import { json } from "body-parser";
-import { ok } from "../processors/response";
+import { ok, updated } from "../processors/response";
 import { Pagination } from "../../../shared/pagination/Pagination";
 import { removeUnderscores, removeUnderscoresFromPaginated } from "../../../shared/removeUnderscore";
 
@@ -62,6 +62,20 @@ export class UserController implements interfaces.Controller{
             status: '000',
             message: 'Success'
         })
+    }
+
+    @httpPut('/:id')
+    async updateTaskById(@request() req: Request, @response() res: Response, next: NextFunction){
+        try{
+            const id = req.params.id;
+            const updates = req.body;
+            //updates.put({updatedAt: new Date()});
+            await this.service.updateUserById(id, updates);
+            return res.json(updated({}, `User with GUID ${id} updated successfully`));
+
+        } catch(error) {
+            next(error);
+        }
     }
 
 } 

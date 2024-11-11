@@ -26,6 +26,8 @@ const sendError = (err: AppError, req: Request, res: Response) => {
 
     const {statusCode, status, message} = err;
 
+    //console.log(err)
+    
     res.status(statusCode).json({
         status,
         message,

@@ -16,53 +16,11 @@ import { applicationContainerModule } from './application/container';
 
 // CONTROLLERS
 
-/*import './interfaces/http/controllers/ApplicationController'
-import './interfaces/http/controllers/UserController'
-import './interfaces/http/controllers/CommonController'
-import './interfaces/http/controllers/AuthController'
-import './interfaces/http/controllers/TaskController'*/
 
 import './interfaces/http/controllers'
 
 // *** //
 import { infraestructureContainerModule } from './infra/container';
-/*
-const app = express();
-
-const limiter = expressRateLimit({
-    max: 10,
-    windowMs: 60 * 60 * 1000,
-    message: 'To many requests.',
-    standardHeaders: true,
-    legacyHeaders: false
-});
-
-app.use(cookieParser());
-app.use(express.json({limit: '10kb'}));
-
-app.use(limiter)
-
-app.use((req: Request, res: Response, next: NextFunction) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, PUT');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-});
-
-app.use(helmet());
-app.use(hpp());
-app.use(xss());
-app.use(ExpressMongoSanitize());
-
-app.get("", (req:Request, res:Response)=> {
-    res.send("Ok ok")
-})
-
-app.all('*', (req:Request, res:Response, next:NextFunction) => {
-    next(sendError(404, 'fail', `Unsupported URL: ${req.originalUrl}`))
-})
-
-export default app;*/
 
 //* TESTE
 
@@ -124,7 +82,7 @@ const initialise = async () => {
     });
   });
 
-  const apiServer = server.build();
+  server.build();
   /*apiServer.listen(config.API_PORT, () =>
     console.log('The application is initialised on the port %s', config.API_PORT)
   );*/

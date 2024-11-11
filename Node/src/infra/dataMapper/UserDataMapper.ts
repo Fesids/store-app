@@ -11,10 +11,12 @@ export class UserDataMapper implements IDataMapper<User> {
             email,
             firstName,
             lastName,
-            password
+            password,
+            createdAt,
+            updatedAt
         } = dalEntity;
 
-        return User.create({email,firstName, lastName, password}, guid);
+        return User.create({email,firstName, lastName, password, createdAt, updatedAt}, guid);
     }
 
     toDalEntity(entity: User) {
@@ -23,7 +25,9 @@ export class UserDataMapper implements IDataMapper<User> {
             email: entity.email,
             firstName: entity.firstname,
             lastName: entity.lastname,
-            password: entity.password
+            password: entity.password,
+            createdAt: entity.createdAt,
+            updatedAt: entity.updatedAt
         }
     }
 

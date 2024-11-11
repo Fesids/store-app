@@ -18,8 +18,10 @@ export class TaskApplication{
 
     }
 
-    async createTask({title, description, completed, employees, departments, createdBy, createdAt, updatedAt}: any): Promise<void> {
+    async createTask({title, description, completed, employees, departments, createdBy}: any): Promise<void> {
 
+        const createdAt = new Date();
+        const updatedAt = new Date();
         const task = Task.create({title, description, completed, employees, createdBy, departments, createdAt, updatedAt});
         
        
@@ -42,6 +44,12 @@ export class TaskApplication{
 
         return new TaskDto(task.guid, task.title, task.description, task.completed, task.employees, task.createdBy, task.departments, task.createdAt, task.updatedAt);
 
+
+    }
+
+    async updateTaskById(id: string, updates: Partial<TaskDto>): Promise<void> {
+        updates.updatedAt = new Date();
+        await this.taskrepository.updateOneById(id, updates);
 
     }
 

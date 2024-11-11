@@ -9,5 +9,7 @@ export interface IRepository<T> {
     doesExists(id: string): Promise<boolean>;
     save(entity: T): Promise<void>;
     delete(id: string): Promise<void>;
+    updateOneById(id: string, updates: Partial<T>): Promise<void>;
+    updateManyByParams(params: Record<string, any>, updates: Partial<T>): Promise<void>
 
 }

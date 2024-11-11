@@ -119,5 +119,33 @@ export class Repository<IDomainEntity> implements IRepository<IDomainEntity> {
         await this.collectionInstance.deleteOne({guid: id})
     }
 
+    async updateOneById(id: string, updates: Partial<IDomainEntity>): Promise<void> {
+        try{
+
+            await this.collectionInstance.updateOne(
+                { guid: id},
+                { $set: updates }
+            );
+
+        } catch(error){
+            console.error("An error occurred while updating doc : ", error);
+            throw error;
+        }
+    }
+
+    async updateManyByParams(params: Record<string, any>, updates: Partial<IDomainEntity>): Promise<void> {
+        try{
+
+            await this.collectionInstance.updateMany(
+                params,
+                { $set: updates }
+            )
+
+        } catch (error) {
+            console.error("An error occurred while updating multiple documents:", error);
+            throw error;
+        }
+    }
+
     
 }

@@ -18,6 +18,8 @@ export class AuthApplication {
 
     async signUpUser(data: SignUpDto): Promise<void>{
         const {email, firstName, lastName, password, rePassword} = data;
+        const createdAt = new Date();
+        const updatedAt = new Date();
 
         const hashPass = await getHashPassword(password);
 
@@ -28,7 +30,7 @@ export class AuthApplication {
 
         if(password !== rePassword) throw new AppError('Password and rePassword didnt match', 404)
 
-        const user = User.create({email, firstName, lastName, password: hashPass});
+        const user = User.create({email, firstName, lastName, password: hashPass, createdAt: createdAt, updatedAt: updatedAt });
 
         await this.userRepository.save(user);
        
@@ -56,7 +58,7 @@ export class AuthApplication {
 
         const token = getJwtToken(jwtPayload);
 
-        const loggedUser = new UserDto(user.guid, user.email, user.firstname, user.lastname, user.password);
+        const loggedUser = new UserDto(user.guid, user.email, user.firstname, user.lastname, user.password, user.createdAt, user.updatedAt);
 
 
         return {

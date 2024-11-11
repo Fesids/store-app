@@ -1,11 +1,11 @@
 import { inject, } from "inversify";
-import { controller, httpGet, httpPost, interfaces, request, response} from "inversify-express-utils";
+import { controller, httpGet, httpPost, httpPut, interfaces, request, response} from "inversify-express-utils";
 import { TYPES } from "../../../constants/types";
 import { TaskApplication } from "../../../application/task/TaskApplication";
 import { NextFunction, Request, Response } from "express";
 import { ITaskRepository } from "../../../domain/task/ITaskRepository";
 import { Task } from "../../../domain/task/Task";
-import { ok } from "../processors/response";
+import { ok, updated } from "../processors/response";
 import { ParsedQs } from 'qs';
 import {removeUnderscores, removeUnderscoresFromPaginated} from '../../../shared/removeUnderscore'
 import { Pagination } from "../../../shared/pagination/Pagination";
@@ -95,6 +95,20 @@ export class TaskController implements interfaces.Controller{
             const task = await this.service.getTaskById(req.params.id);
             return res.json(ok(task, `task with ${req.params.id} retrived successfully`))
         } catch (error) {
+            next(error);
+        }
+    }
+
+    @httpPut('/:id')
+    async updateTaskById(@request() req: Request, @response() res: Response, next: NextFunction){
+        try{
+            const id = req.params.id;
+            const updates = req.body;
+            //updates.put({updatedAt: new Date()});
+            await this.service.updateTaskById(id, updates);
+            return res.json(updated({}, `Task with GUID ${id} updated successfully`));
+
+        } catch(error) {
             next(error);
         }
     }
