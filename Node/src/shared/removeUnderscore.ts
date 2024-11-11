@@ -11,3 +11,20 @@ export const removeUnderscores = (data: any): any=>{
         ])
     );
 }
+
+export const removeUnderscoresFromPaginated = (data: any): any => {
+    if (Array.isArray(data)) {
+        return data.map(item => removeUnderscores(item));
+    }
+
+    if (typeof data === 'object' && data !== null) {
+        return Object.fromEntries(
+            Object.entries(data).map(([key, value]) => [
+                key.startsWith('_') ? key.slice(1) : key,
+                removeUnderscoresFromPaginated(value)  
+            ])
+        );
+    }
+
+    return data;
+};

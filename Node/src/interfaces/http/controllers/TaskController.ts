@@ -7,7 +7,7 @@ import { ITaskRepository } from "../../../domain/task/ITaskRepository";
 import { Task } from "../../../domain/task/Task";
 import { ok } from "../processors/response";
 import { ParsedQs } from 'qs';
-import {removeUnderscores} from '../../../shared/removeUnderscore'
+import {removeUnderscores, removeUnderscoresFromPaginated} from '../../../shared/removeUnderscore'
 import { Pagination } from "../../../shared/pagination/Pagination";
 
 
@@ -81,7 +81,8 @@ export class TaskController implements interfaces.Controller{
             }
     
             const tasks = await this.service.getTasksByCriterias(criteria ,pagination);
-            return res.json(ok(removeUnderscores(tasks), 'Success'));
+            tasks.data = removeUnderscoresFromPaginated(tasks.data)
+            return res.json(ok(tasks, 'Success'));
         } catch (error) {
             next(error);
         }

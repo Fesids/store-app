@@ -8,7 +8,7 @@ import { UserApplication } from "../../../application/user/UserApplication";
 import { json } from "body-parser";
 import { ok } from "../processors/response";
 import { Pagination } from "../../../shared/pagination/Pagination";
-import { removeUnderscores } from "../../../shared/removeUnderscore";
+import { removeUnderscores, removeUnderscoresFromPaginated } from "../../../shared/removeUnderscore";
 
 
 @controller('/api/v1/users')
@@ -36,7 +36,8 @@ export class UserController implements interfaces.Controller{
         delete criteria.pageSize;
 
         const users = await this.service.getPaginetedUsers(criteria ,pagination);
-        return res.json(ok(removeUnderscores(users), 'Success'));
+        users.data = removeUnderscoresFromPaginated(users.data)
+        return res.json(ok(users, 'Success'));
     }
 
     @httpGet('/all')
