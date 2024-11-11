@@ -5,13 +5,14 @@ import { AuthService } from "../../services/auth.service";
 import { BoxComponent } from "../../shared/components/boxComponent/box.component";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { HeaderComponent } from "../../shared/layout/header.component";
+import { TaskListcomponent } from "../../shared/components/task/list/task-list.component";
 
 
 @Component({
     standalone: true,
     styleUrl:"./home.component.scss",
     templateUrl: "./home.component.html",
-    imports: [BoxComponent, HeaderComponent]
+    imports: [BoxComponent, HeaderComponent, TaskListcomponent]
 })
 export class HomePageComponent implements OnInit, OnDestroy{
 

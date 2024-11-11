@@ -11,7 +11,7 @@ export class ApiService {
     private readonly http = inject(HttpClient);
     private readonly api_url = 'http://localhost:3000/api/v1' //API_URL;
 
-    get<T>(url: string, params: HttpParams): Observable<T> {
+    get<T>(url: string, params?: HttpParams): Observable<T> {
         return this.http.get<T>(`${this.api_url}${url}`, {params});
     }
 

@@ -1,0 +1,7 @@
+<app-paginated-list
+  [data]="tasks.data"
+  [total]="tasks.total"
+  [pageSize]="tasks.pageSize"
+  [page]="tasks.page"
+  (pageChange)="onPageChange($event)">
+</app-paginated-list>
