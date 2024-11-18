@@ -1,0 +1,27 @@
+<!--<a [href]="link"
+   class="p-2 border border-slate-200 rounded-md inline-flex space-x-1 items-center 
+          {{ bgColor }} {{ hoverBgColor }} {{ textColor }} {{ hoverTextColor }} {{ additionalClasses }}">
+ 
+  <ng-container *ngIf="iconSvg" [innerHTML]="iconSvg"></ng-container>
+
+  
+  <ng-container *ngIf="iconImg">
+    <img [src]="iconImg" alt="icon" class="w-4 h-4" />
+  </ng-container>
+
+ 
+  <span class="text-sm font-medium hidden md:block" *ngIf="label">{{ label }}</span>
+</a>-->
+
+<a [href]="link"
+   class="p-2 border border-slate-200 rounded-md inline-flex space-x-1 items-center 
+          {{ bgColor }} {{ hoverBgColor }} {{ textColor }} {{ hoverTextColor }} {{ additionalClasses }}">
+  <!-- Render SVG if provided -->
+  <span *ngIf="iconSvg" [innerHTML]="iconSvg"></span>
+
+  <!-- Render Image if provided -->
+  <img *ngIf="iconImg" [src]="iconImg" alt="icon" class="w-4 h-4" />
+
+  <!-- Render label text -->
+  <span class="text-sm font-medium hidden md:block" *ngIf="label">{{ label }}</span>
+</a>

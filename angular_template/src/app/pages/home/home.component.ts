@@ -6,17 +6,33 @@ import { BoxComponent } from "../../shared/components/boxComponent/box.component
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { HeaderComponent } from "../../shared/layout/header.component";
 import { TaskListcomponent } from "../../shared/components/task/list/task-list.component";
+import { TaskListContainerComponent } from "../../shared/components/task/list-container/task-list-container.component";
+import { TaskChartComponent } from "../../shared/charts/task-chart/task-chart.component";
 
 
 @Component({
     standalone: true,
     styleUrl:"./home.component.scss",
     templateUrl: "./home.component.html",
-    imports: [BoxComponent, HeaderComponent, TaskListcomponent]
+    imports: [BoxComponent, HeaderComponent, TaskListContainerComponent, TaskChartComponent]
 })
 export class HomePageComponent implements OnInit, OnDestroy{
 
     @Input() title = "teste home";
+
+    tasks = [
+      { title: 'Task 1', completed: true },
+      { title: 'Task 2', completed: false },
+      { title: 'Task 3', completed: true }
+    ];
+  
+    get completedTasksCount() {
+      return this.tasks.filter(task => task.completed).length;
+    }
+  
+    get notCompletedTasksCount() {
+      return this.tasks.filter(task => !task.completed).length;
+    }
 
     constructor(private dailog: MatDialog){}
 

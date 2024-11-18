@@ -1,0 +1,33 @@
+<div class="w-lg mx-auto my-10 bg-white">
+    <div class="max-w-lg p-8 rounded-xl shadow shadow-slate-300 mx-5">
+        <div class="flex flex-row justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-medium">Lista de tarefas</h1>
+            </div>
+            <div class="inline-flex space-x-2 items-center">
+                <app-custom-button
+                label="Urgente"
+                [iconSvg]="urgentSvg"
+                bgColor="bg-indigo-600"
+                hoverBgColor="hover:bg-indigo-500"
+                textColor="text-white"
+                hoverTextColor="hover:text-black"
+                link="/important-action">
+            </app-custom-button>
+
+            <app-custom-button
+            label="Últimas"
+            [iconSvg]="latestSvg"
+            bgColor="bg-white"
+            hoverBgColor="hover:bg-slate-200"
+            textColor="text-black"
+            hoverTextColor="hover:text-indigo-400"
+            link="/important-action">
+            </app-custom-button>
+            
+            </div>
+        </div>
+        <p class="text-slate-500">Olá, aqui estão suas últimas tarefas</p>
+        <app-task-list></app-task-list>
+    </div>
+</div>

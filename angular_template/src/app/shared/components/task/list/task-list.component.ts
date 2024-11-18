@@ -4,17 +4,18 @@ import { PaginatedResponse } from "../../interfaces/paginatedResponse";
 import { TaskModel } from "../../../../store/models/task.model";
 import { TaskService } from "../../../../services/task.service";
 import { response } from "express";
+import { CommonModule } from "@angular/common";
 
 @Component({
     standalone: true,
     selector: "app-task-list",
     templateUrl: './task-list.component.html',
     styleUrls: ['./task-list.component.scss'],
-    imports: [PaginatedListComponent]
+    imports: [PaginatedListComponent, CommonModule]
 })
 export class TaskListcomponent implements OnInit{
 
-    tasks: PaginatedResponse<TaskModel> = {data: [], total: 0, page: 1, pageSize: 1};
+    tasks: PaginatedResponse<TaskModel> = {data: [], total: 0, page: 1, pageSize: 5};
     criteria = {};
 
     constructor(private taskService: TaskService) {}
@@ -27,7 +28,7 @@ export class TaskListcomponent implements OnInit{
 
     loadTasks() {
         this.taskService.retrievePaginatedTasks(this.criteria, this.tasks.page, this.tasks.pageSize)
-        .subscribe(response => this.tasks = response );
+        .subscribe(response => this.tasks = response.data? response.data: {} as any );
     }
 
     onPageChange(newPage: number) {
