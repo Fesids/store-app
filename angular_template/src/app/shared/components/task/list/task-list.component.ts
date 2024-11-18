@@ -14,7 +14,7 @@ import { response } from "express";
 })
 export class TaskListcomponent implements OnInit{
 
-    tasks: PaginatedResponse<TaskModel> = {data: [], total: 0, page: 1, pageSize: 10};
+    tasks: PaginatedResponse<TaskModel> = {data: [], total: 0, page: 1, pageSize: 1};
     criteria = {};
 
     constructor(private taskService: TaskService) {}
@@ -27,7 +27,7 @@ export class TaskListcomponent implements OnInit{
 
     loadTasks() {
         this.taskService.retrievePaginatedTasks(this.criteria, this.tasks.page, this.tasks.pageSize)
-        .subscribe(response => this.tasks = response.data? response.data: {} as PaginatedResponse<any> );
+        .subscribe(response => this.tasks = response );
     }
 
     onPageChange(newPage: number) {

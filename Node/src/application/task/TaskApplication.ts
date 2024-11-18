@@ -22,7 +22,8 @@ export class TaskApplication{
 
         const createdAt = new Date();
         const updatedAt = new Date();
-        const task = Task.create({title, description, completed, employees, createdBy, departments, createdAt, updatedAt});
+        const completedBy = "";
+        const task = Task.create({title, description, completed, employees, createdBy, completedBy, departments, createdAt, updatedAt});
         
        
         await this.taskrepository.save(task);

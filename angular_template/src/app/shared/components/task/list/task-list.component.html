@@ -3,5 +3,14 @@
   [total]="tasks.total"
   [pageSize]="tasks.pageSize"
   [page]="tasks.page"
-  (pageChange)="onPageChange($event)">
+  (pageChange)="onPageChange($event)"
+  [itemTemplate]="taskTemplate">
 </app-paginated-list>
+
+<ng-template #taskTemplate let-task>
+  <div class="task-item">
+    <h2>{{ task.title }}</h2>
+    <p>{{ task.description }}</p>
+    <span>Status: {{ task.completed ? 'Completed' : 'Pending' }}</span>
+  </div>
+</ng-template>

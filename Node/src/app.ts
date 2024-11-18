@@ -26,7 +26,7 @@ import { infraestructureContainerModule } from './infra/container';
 
 // Rate limit middleware
 const limiter = expressRateLimit({
-  max: 10,
+  max: 45,
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests.',
   standardHeaders: true,
@@ -43,7 +43,7 @@ const initialise = async () => {
   server.setConfig((app: ExpressApplication) => {
     // Security & Middleware setup
     app.use(cookieParser());
-    app.use(express.json({ limit: '10kb' }));
+    app.use(express.json({ limit: '30kb' }));
     app.use(limiter);
 
     // CORS Handling

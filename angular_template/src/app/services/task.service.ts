@@ -13,8 +13,8 @@ export class TaskService {
     private readonly apiService = inject(ApiService);
 
 
-    retrievePaginatedTasks(criteria: any, page: number, pageSize: number): Observable<SuccessResponse<PaginatedResponse<TaskModel>>>{
-        return this.apiService.get<SuccessResponse<PaginatedResponse<TaskModel>>>("/tasks?employees=86db2f60-bbd8-4ad8-b80d-4ea84e37865f")
+    retrievePaginatedTasks(criteria: any, page: number, pageSize: number): Observable<PaginatedResponse<TaskModel>>{
+        return this.apiService.get<PaginatedResponse<TaskModel>>(`/tasks?employees=86db2f60-bbd8-4ad8-b80d-4ea84e37865f&page=${page}&pageSize=${pageSize}`)
         //return this.apiService.post<any, any>("/auth/login", data)
         /*.pipe(
             tap(data => console.log(JSON.stringify(data)))

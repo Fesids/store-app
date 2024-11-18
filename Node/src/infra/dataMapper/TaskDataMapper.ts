@@ -14,13 +14,15 @@ export class TaskDataMapper implements IDataMapper<Task>{
             completed,
             employees,
             createdBy,
+            completedBy,
             departments,
             createdAt,
-            updatedAt
+            updatedAt,
+
 
         } = dalEntity;
 
-        return Task.create({title, description, completed, employees, createdBy, departments, createdAt, updatedAt}, guid)
+        return Task.create({title, description, completed, employees, createdBy, completedBy,departments, createdAt, updatedAt}, guid)
     }
     toDalEntity(entity: Task) {
         return {
@@ -30,6 +32,7 @@ export class TaskDataMapper implements IDataMapper<Task>{
             completed: entity.completed,
             employees: entity.employees,
             createdBy: entity.createdBy,
+            completedBy: entity.createdBy,
             departments: entity.departments,
             createdAt: entity.createdAt,
             updatedAt: entity.updatedAt

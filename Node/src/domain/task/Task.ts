@@ -7,6 +7,7 @@ export interface ITaskProps {
     completed: boolean,
     employees: Array<string>,
     createdBy: Array<string>,
+    completedBy: string,
     departments: Array<string>, 
     createdAt: Date,
     updatedAt: Date
@@ -19,12 +20,13 @@ export class Task extends Entity<ITaskProps> implements IAggregateRoot{
     private _completed: boolean;
     private _employees: Array<string>;
     private _createdBy: Array<string>;
+    private _completedBy: string;
     private _departments: Array<string>;
     private _createdAt: Date;
     private _updatedAt: Date;
 
 
-    constructor({title, description, completed, employees, createdBy, departments, createdAt, updatedAt}: ITaskProps, guid?:string){
+    constructor({title, description, completed, employees, createdBy, completedBy, departments, createdAt, updatedAt}: ITaskProps, guid?:string){
         super(guid);
         this._title = title;
         this._description = description;
@@ -34,6 +36,7 @@ export class Task extends Entity<ITaskProps> implements IAggregateRoot{
         this._departments = departments;
         this._createdAt = createdAt;
         this._updatedAt = updatedAt;
+        this._completedBy = completedBy;
     }
 
     get title(){
@@ -66,6 +69,10 @@ export class Task extends Entity<ITaskProps> implements IAggregateRoot{
 
     get updatedAt(){
         return this._updatedAt;
+    }
+
+    get completedBy() {
+        return this._completedBy;
     }
 
     public static create(props: ITaskProps, guid?: string ){

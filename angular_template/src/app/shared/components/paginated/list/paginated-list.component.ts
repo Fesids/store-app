@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, TemplateRef } from "@angular/core";
 
 
 @Component({
@@ -12,8 +12,9 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 export class PaginatedListComponent {
     @Input() data: any[] = [];
     @Input() total: number = 0;
-    @Input() pageSize: number = 10;
+    @Input() pageSize: number = 1;
     @Input() page: number = 1;
+    @Input() itemTemplate!: TemplateRef<any>;
     @Output() pageChange = new EventEmitter<number>();
 
     totalPages = 1;

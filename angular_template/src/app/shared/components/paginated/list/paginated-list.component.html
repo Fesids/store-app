@@ -1,6 +1,7 @@
 <div *ngFor="let item of data">
-    <!-- Render fields dynamically based on item properties -->
-    <pre>{{ item | json }}</pre>
+  <ng-container 
+    *ngTemplateOutlet="itemTemplate; context: { $implicit: item }">
+  </ng-container>
   </div>
   
   <div class="pagination-controls">
