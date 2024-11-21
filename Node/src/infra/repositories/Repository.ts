@@ -21,7 +21,7 @@ export class Repository<IDomainEntity> implements IRepository<IDomainEntity> {
         this.dataMapper = dataMapper;
     }
 
-    async findAllByParam(params: Record<string, any>, pagination?: Pagination): Promise<IDomainEntity | any> {
+    async findAllByParams(params: Record<string, any>, pagination?: Pagination): Promise<IDomainEntity | any> {
 
         const { skip, limit } = getPaginationOptions(pagination);
        
@@ -64,6 +64,18 @@ export class Repository<IDomainEntity> implements IRepository<IDomainEntity> {
        return dbResult.map((result) => this.dataMapper.toDomain(result));
     }
 
+    async findAllByParam(param: string, value: any): Promise<IDomainEntity[]> {
+        const query = {
+          $or: [
+            { [param]: value },
+            { [param]: { $elemMatch: { $eq: value } } } 
+          ]
+        };
+      
+        const dbResult = await this.collectionInstance.find(query).toArray();
+        return dbResult.map((result) => this.dataMapper.toDomain(result));
+      }
+      
     async findOneById(id: string): Promise<IDomainEntity | null> {
         const dbResult = await this.collectionInstance.findOne({guid:id});
         if (!dbResult) return null;

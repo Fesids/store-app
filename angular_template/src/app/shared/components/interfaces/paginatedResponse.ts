@@ -1,7 +1,11 @@
-
 export interface PaginatedResponse<T> {
-    data: Array<T>,
-    total: number,
-    page: number,
-    pageSize: number
-}
+    data: {
+      data: T[];
+      total: number;
+      page: number;
+      pageSize: number;
+      totalPages: number;
+    };
+    status: string;
+    message: string;
+  }

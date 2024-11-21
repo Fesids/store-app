@@ -11,7 +11,7 @@ export class ApiService {
     private readonly http = inject(HttpClient);
     private readonly api_url = 'http://localhost:3000/api/v1' //API_URL;
 
-    get<T>(url: string, params?: HttpParams): Observable<T> {
+    get<T>(url: string, params: HttpParams): Observable<T> {
         return this.http.get<T>(`${this.api_url}${url}`, {params});
     }
 
@@ -22,10 +22,10 @@ export class ApiService {
             }
         )
         /*return this.http.post<T>(url, data).pipe(
-            tap(response => console.log('Response:', response)), // Ensure it logs correctly
+            tap(response => console.log('Response:', response)), 
             catchError(err => {
                 console.error('HTTP error:', err);
-                return of({} as T); // Return a fallback observable if needed
+                return of({} as T); 
             })
             );*/
     }

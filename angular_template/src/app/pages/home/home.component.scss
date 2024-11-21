@@ -1,0 +1,11 @@
+#home-page{
+    display: flex;
+    flex-direction: column;
+}
+
+.home-page-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    //background-color: red;
+}

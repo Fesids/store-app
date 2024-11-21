@@ -32,9 +32,17 @@ export class TaskApplication{
 
     async getTasksByCriterias(criteria: Record<string, any>, pagination?: Pagination): Promise<any> {
 
-        const tasks = await this.taskrepository.findAllByParam(criteria, pagination);
+        const tasks = await this.taskrepository.findAllByParams(criteria, pagination);
 
         return tasks;
+    }
+
+    async getTasksByParam(param: string, value: any): Promise<any> {
+
+        const tasks = await this.taskrepository.findAllByParam(param, value);
+
+        return tasks;
+
     }
 
     async getTaskById(id: string): Promise<any | null>{

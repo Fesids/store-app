@@ -1,50 +1,82 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ApexNonAxisChartSeries, ApexChart, ApexTitleSubtitle, ApexResponsive, NgApexchartsModule } from 'ng-apexcharts';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import {
+  ApexNonAxisChartSeries,
+  ApexChart,
+  ApexResponsive,
+  ApexTitleSubtitle,
+  ApexLegend,
+} from 'ng-apexcharts';
+
+interface Task {
+  title: string;
+  completed: boolean;
+}
 
 @Component({
-    standalone: true,
+  standalone: true,
   selector: 'app-task-chart',
   templateUrl: './task-chart.component.html',
   styleUrls: ['./task-chart.component.scss'],
-  imports: [NgApexchartsModule]
+  imports: [NgApexchartsModule],
 })
-export class TaskChartComponent implements OnInit {
-  @Input() completedTasks: number = 0;
-  @Input() notCompletedTasks: number = 0;
+export class TaskChartComponent implements OnInit, OnChanges {
+  @Input() tasks: any[]  = []; 
+
+  
+  @Input() chartType: ApexChart['type'] = 'donut';
+  @Input() chartTitle: string = 'Titulo';
+  @Input() colors: string[] = ['#00E396', '#FEB019']; 
+  @Input() legendPosition: ApexLegend['position'] = 'bottom';
 
   public chartSeries: ApexNonAxisChartSeries = [];
+  public chartLabels: string[] = ['Completa', 'Pendente'];
   public chartDetails: ApexChart = {
-    type: 'donut',
-    width: 380
+    type: this.chartType,
+    width: 380,
   };
-  public chartLabels = ['Completed', 'Not Completed'];
+  public chartTitleConfig: ApexTitleSubtitle = {
+    text: this.chartTitle,
+    align: 'center',
+  };
   public chartResponsive: ApexResponsive[] = [
     {
       breakpoint: 480,
       options: {
         chart: {
-          width: 300
+          width: 300,
         },
         legend: {
-          position: 'bottom'
-        }
-      }
-    }
+          position: this.legendPosition,
+        },
+      },
+    },
   ];
-  public chartTitle: ApexTitleSubtitle = {
-    text: 'Task Completion Status',
-    align: 'center'
-  };
 
   ngOnInit() {
     this.updateChart();
   }
 
-  ngOnChanges() {
-    this.updateChart();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['tasks'] || changes['chartType'] || changes['chartTitle']) {
+      this.updateChart();
+    }
   }
+  
 
   private updateChart() {
-    this.chartSeries = [this.completedTasks, this.notCompletedTasks];
+    const completed = this.tasks.filter((task) => task.completed).length;
+    const notCompleted = this.tasks.length - completed;
+
+    this.chartSeries = [completed, notCompleted];
+    this.chartDetails = {
+      ...this.chartDetails,
+      type: this.chartType,
+    };
+
+    this.chartTitleConfig = {
+      ...this.chartTitleConfig,
+      text: this.chartTitle,
+    };
   }
 }
