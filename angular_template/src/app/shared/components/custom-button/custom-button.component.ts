@@ -11,13 +11,13 @@ import { SafeHtml } from "@angular/platform-browser";
     schemas: [NO_ERRORS_SCHEMA]
 })
 export class CustomButtonComponent {
-    @Input() label: string = ''; // The text label inside the button
-    @Input() iconSvg?: SafeHtml;  // SVG markup as a string
-    @Input() iconImg?: string;  // URL for an image
-    @Input() bgColor: string = 'bg-indigo-600'; // Default background color
-    @Input() hoverBgColor: string = 'hover:bg-indigo-500'; // Hover background color
-    @Input() textColor: string = 'text-white'; // Default text color
-    @Input() hoverTextColor: string = 'hover:text-white'; // Hover text color
-    @Input() additionalClasses: string = ''; // Custom classes for additional styling
+    @Input() label: string = ''; 
+    @Input() iconSvg?: SafeHtml; 
+    @Input() iconImg?: string;  
+    @Input() bgColor: string = 'bg-indigo-600'; 
+    @Input() hoverBgColor: string = 'hover:bg-indigo-500'; 
+    @Input() textColor: string = 'text-white'; 
+    @Input() hoverTextColor: string = 'hover:text-white'; 
+    @Input() additionalClasses: string = ''; 
     @Input() link: string = '#';
 }

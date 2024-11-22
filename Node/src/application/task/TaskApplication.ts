@@ -62,4 +62,103 @@ export class TaskApplication{
 
     }
 
+    private calculatePercentageChange(current: number, previous: number): number {
+        if (previous === 0) {
+          return current === 0 ? 0 : 100;
+        }
+        return ((current - previous) / previous) * 100;
+      }
+
+    async getTaskStatisticsByEmployee(
+        employeeId: string
+      ): Promise<any> {
+        const now = new Date();
+        const firstDayOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        const firstDayOfLastMonth = new Date(
+          now.getFullYear(),
+          now.getMonth() - 1,
+          1
+        );
+        const lastDayOfLastMonth = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          0,
+          23,
+          59,
+          59
+        );
+      
+        
+        const tasksCreatedThisMonth = await this.taskrepository.countByCriteria({
+          employees: { $in: [employeeId] },
+          createdAt: { $gte: firstDayOfThisMonth },
+        });
+      
+        const tasksCreatedLastMonth = await this.taskrepository.countByCriteria({
+          employees: { $in: [employeeId] },
+          createdAt: { $gte: firstDayOfLastMonth, $lte: lastDayOfLastMonth },
+        });
+      
+        const taskCreationChange = this.calculatePercentageChange(
+          tasksCreatedThisMonth,
+          tasksCreatedLastMonth
+        );
+      
+        
+        const tasksCompletedThisMonth = await this.taskrepository.countByCriteria({
+          employees: { $in: [employeeId] },
+          completed: true,
+          updatedAt: { $gte: firstDayOfThisMonth },
+        });
+      
+        const tasksCompletedLastMonth = await this.taskrepository.countByCriteria({
+          employees: { $in: [employeeId] },
+          completed: true,
+          updatedAt: { $gte: firstDayOfLastMonth, $lte: lastDayOfLastMonth },
+        });
+      
+        const taskCompletionChange = this.calculatePercentageChange(
+          tasksCompletedThisMonth,
+          tasksCompletedLastMonth
+        );
+      
+        
+        const tasksPendingThisMonth = await this.taskrepository.countByCriteria({
+          employees: { $in: [employeeId] },
+          completed: false,
+          updatedAt: { $gte: firstDayOfThisMonth },
+        });
+      
+        const tasksPendingLastMonth = await this.taskrepository.countByCriteria({
+          employees: { $in: [employeeId] },
+          completed: false,
+          updatedAt: { $gte: firstDayOfLastMonth, $lte: lastDayOfLastMonth },
+        });
+      
+        const taskPendingChange = this.calculatePercentageChange(
+          tasksPendingThisMonth,
+          tasksPendingLastMonth
+        );
+      
+        return {
+          employeeId,
+          created: {
+            thisMonth: tasksCreatedThisMonth,
+            lastMonth: tasksCreatedLastMonth,
+            change: taskCreationChange,
+          },
+          completed: {
+            thisMonth: tasksCompletedThisMonth,
+            lastMonth: tasksCompletedLastMonth,
+            change: taskCompletionChange,
+          },
+          pending: {
+            thisMonth: tasksPendingThisMonth,
+            lastMonth: tasksPendingLastMonth,
+            change: taskPendingChange,
+          },
+        };
+      }
+      
+
 }

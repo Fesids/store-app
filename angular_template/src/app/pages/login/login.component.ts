@@ -31,7 +31,7 @@ export class LoginPageComponent implements OnInit{
         this.router.navigate(['/signup'])
       }
     
-      onSubmit(data: any) {
+      /*onSubmit(data: any) {
         console.log('Login data:', data);
         this.authService.loginUser(data)
       .pipe(
@@ -44,7 +44,31 @@ export class LoginPageComponent implements OnInit{
           complete: () => console.log('Request complete.')
         });
        
-      }
+      }*/
+
+        onSubmit(data: any) {
+          console.log('Login data:', data);
+          this.authService.loginUser(data)
+            .pipe(
+              tap(data => console.log('Response:', data.data))
+            )
+            .subscribe({
+              next: (response) => {
+                const token = response.data?.token || "";
+                setTokenCookie(token); // Store the token
+                console.log('Token saved:', token);
+              },
+              error: (err) => {
+                console.error('Error:', err);
+              },
+              complete: () => {
+                console.log('Login successful. Redirecting to home...');
+                this.router.navigate(['']); // Redirect to the home page
+              }
+            });
+        }
+        
+        
 
     ngOnInit(): void {
       

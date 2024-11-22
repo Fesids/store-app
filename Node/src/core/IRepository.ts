@@ -11,6 +11,7 @@ export interface IRepository<T> {
     save(entity: T): Promise<void>;
     delete(id: string): Promise<void>;
     updateOneById(id: string, updates: Partial<T>): Promise<void>;
-    updateManyByParams(params: Record<string, any>, updates: Partial<T>): Promise<void>
+    updateManyByParams(params: Record<string, any>, updates: Partial<T>): Promise<void>;
+    countByCriteria(criteria: Record<string, any>): Promise<number>
 
 }

@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { HeaderComponent } from '../../shared/layout/header.component';
+import { HeaderComponent } from '../../shared/layout/header/header.component';
 import { TaskListContainerComponent } from '../../shared/components/task/list-container/task-list-container.component';
 import { TaskChartComponent } from '../../shared/charts/task-chart/task-chart.component';
 import { BoxComponent } from '../../shared/components/boxComponent/box.component';

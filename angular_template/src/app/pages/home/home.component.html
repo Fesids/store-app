@@ -1,16 +1,19 @@
 <div id="home-page">
     <app-header-component></app-header-component>
-    <h1>{{ title }}</h1>
+   
   
     <div class="home-page-content lg:px-12 md:px-8 sm:px-4">
       <app-task-list-container></app-task-list-container>
       
-      <app-task-chart
+      <div class="app-chart-wrapper">
+        <app-task-chart
         [tasks]="(tasksArray$ | async) || []"
         chartType="donut"
         chartTitle="Progressão das tarefas"
         [colors]="['rgb(79, 70, 229)', '#FF5722']">
         </app-task-chart>
+      </div>
+      
 
     </div>
   

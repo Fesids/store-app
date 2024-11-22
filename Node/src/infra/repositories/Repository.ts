@@ -159,5 +159,15 @@ export class Repository<IDomainEntity> implements IRepository<IDomainEntity> {
         }
     }
 
+    async countByCriteria(criteria: Record<string, any>): Promise<number> {
+        try {
+          return await this.collectionInstance.countDocuments(criteria);
+        } catch (error) {
+          console.error("Error while counting documents:", error);
+          throw error;
+        }
+      }
+      
+
     
 }

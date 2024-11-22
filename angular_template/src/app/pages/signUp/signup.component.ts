@@ -50,7 +50,10 @@ export class SignupPageComponent implements OnInit{
           .subscribe({
             next: (data) => console.log('Success:', data),
             error: (err) => console.error('Error:', err),
-            complete: () => console.log('Request complete.')
+            complete: () => {
+              console.log('Signup successful. Redirecting to login...');
+              this.router.navigate(['/login']); 
+            }
           });
         //this.store.dispatch(signupRequested(data))
     }

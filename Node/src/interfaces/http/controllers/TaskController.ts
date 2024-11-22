@@ -109,6 +109,16 @@ export class TaskController implements interfaces.Controller{
         }
     }
 
+    @httpGet("/statistic/employee/:id")
+    async getTasksStatisticByEmployeeId(@request() req: Request, @response() res: Response, next: NextFunction){
+        try {
+            const statistics = await this.service.getTaskStatisticsByEmployee(req.params.id)
+            return res.json(ok(statistics, `Statistics retrived successfully`))
+        } catch (error) {
+            next(error);
+        }
+    }
+
     @httpPut('/:id')
     async updateTaskById(@request() req: Request, @response() res: Response, next: NextFunction){
         try{
