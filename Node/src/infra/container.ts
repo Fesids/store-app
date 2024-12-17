@@ -15,6 +15,10 @@ import { ITaskProps, Task } from "../domain/task/Task";
 import { TaskDataMapper } from "./dataMapper/TaskDataMapper";
 import { ITaskRepository } from "../domain/task/ITaskRepository";
 import { TaskRepository } from "./repositories/TaskRepository";
+import { Attach } from "../domain/attach/Attach";
+import { AttachDataMapper } from "./dataMapper/AttachDataMapper";
+import { IAttachRepository } from "../domain/attach/IAttachRepository";
+import { AttachRepository } from "./repositories/AttachRepository";
 
 export const infraestructureContainerModule = new AsyncContainerModule(async(bind: interfaces.Bind) =>{
     const db: Db = await createMongodbConnection(config.MONGODB_URI, {});
@@ -29,5 +33,10 @@ export const infraestructureContainerModule = new AsyncContainerModule(async(bin
 
     bind<IDataMapper<Task>>(TYPES.TaskDataMapper).to(TaskDataMapper);
     bind<ITaskRepository>(TYPES.TaskRepository).to(TaskRepository);
+
+    // ** Attach
+
+    bind<IDataMapper<Attach>>(TYPES.AttachDataMapper).to(AttachDataMapper);
+    bind<IAttachRepository>(TYPES.AttachRepository).to(AttachRepository);
 
 } )

@@ -21,6 +21,15 @@ export class Repository<IDomainEntity> implements IRepository<IDomainEntity> {
         this.dataMapper = dataMapper;
     }
 
+    async aggregate(pipeline: any[]): Promise<any[]> {
+        try {
+            return await this.collectionInstance.aggregate(pipeline).toArray();
+        } catch(error) {
+            console.error("Aggregation failed:", error);
+            throw error;
+        }
+    }
+
     async findAllByParams(params: Record<string, any>, pagination?: Pagination): Promise<IDomainEntity | any> {
 
         const { skip, limit } = getPaginationOptions(pagination);

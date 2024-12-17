@@ -1,4 +1,4 @@
-import { UserRepository } from "../infra/repositories/UserRepository";
+
 
 export const TYPES = {
     Db: Symbol('Db'),
@@ -21,6 +21,14 @@ export const TYPES = {
 
     TaskApplication: Symbol('TaskApplication'),
 
-    TaskRepository: Symbol('TaskRepository')
+    TaskRepository: Symbol('TaskRepository'),
+
+    // ** ATTACH 
+
+    AttachDataMapper: Symbol('AttachDataMapper'),
+
+    AttachApplication: Symbol('AttachApplication'),
+
+    AttachRepository: Symbol('AttachRepository')
     
 }

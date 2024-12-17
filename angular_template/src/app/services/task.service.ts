@@ -1,18 +1,18 @@
 import { inject, Injectable } from "@angular/core";
 import { ApiService } from "../http/api.service";
 import { BehaviorSubject, map, Observable } from "rxjs";
-import { SuccessResponse } from "../store/models/successResponse";
-import { AuthResponse, LoginUserData } from "../store/models/auth.model";
+import { SuccessResponse } from "../models/successResponse";
+import { AuthResponse, LoginUserData } from "../models/auth.model";
 import { PaginatedResponse } from "../shared/components/interfaces/paginatedResponse";
-import { TaskModel } from "../store/models/task.model";
+import { TaskModel } from "../models/task.model";
 import { HttpClient } from "@angular/common/http";
+import { TaskStatistics } from "../models/task-statistics.model";
 
 
 @Injectable({providedIn: 'root'})
 export class TaskService {
 
     private readonly apiService = inject(ApiService);
-    constructor(private http: HttpClient) {}
 
     private tasksSubject = new BehaviorSubject<PaginatedResponse<TaskModel>>({
         data: { data: [], total: 0, page: 1, pageSize: 5, totalPages: 0 },
@@ -22,9 +22,23 @@ export class TaskService {
 
     private allTasksSubject = new BehaviorSubject<SuccessResponse<TaskModel[]>>({} as any)
     
+    private taskEmployeeStatisticsSubject = new BehaviorSubject<SuccessResponse<TaskStatistics>>({} as any)
     
-      tasks$ = this.tasksSubject.asObservable();
-      allTasks$ = this.allTasksSubject.asObservable();
+    tasks$ = this.tasksSubject.asObservable();
+    allTasks$ = this.allTasksSubject.asObservable();
+    taskEmployeeStatistics = this.taskEmployeeStatisticsSubject.asObservable();
+
+    loadTaskById(taskId: string): Observable<SuccessResponse<TaskModel>> {
+      return this.apiService.get<SuccessResponse<TaskModel>>(`/tasks/${taskId}`, {} as any)
+    }
+
+    loadTaskEmployeeStatistics(employeeId: string): void {
+      this.apiService.get<SuccessResponse<TaskStatistics>>(`/tasks/statistic/employee/${employeeId}`, {} as any)
+      .subscribe({
+        next: (response) => this.taskEmployeeStatisticsSubject.next(response),
+        error: (err) => console.error('Error loading tasks employee statistcs', err),
+      })
+    }
     
     loadTasksById(id: string): void {
             

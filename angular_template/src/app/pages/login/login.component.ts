@@ -55,7 +55,7 @@ export class LoginPageComponent implements OnInit{
             .subscribe({
               next: (response) => {
                 const token = response.data?.token || "";
-                setTokenCookie(token); // Store the token
+                setTokenCookie(token); 
                 console.log('Token saved:', token);
               },
               error: (err) => {
@@ -63,7 +63,7 @@ export class LoginPageComponent implements OnInit{
               },
               complete: () => {
                 console.log('Login successful. Redirecting to home...');
-                this.router.navigate(['']); // Redirect to the home page
+                this.router.navigate(['']); 
               }
             });
         }

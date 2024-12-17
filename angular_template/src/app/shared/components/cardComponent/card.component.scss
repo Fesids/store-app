@@ -1,0 +1,12 @@
+:host {
+    display: block;
+  }
+  
+  .bg-custom {
+    background-color: var(--custom-bg-color, #f3f4f6);
+  }
+  
+  .text-custom {
+    color: var(--custom-text-color, #374151);
+  }
+  

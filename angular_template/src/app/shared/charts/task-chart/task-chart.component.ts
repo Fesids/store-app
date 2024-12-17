@@ -33,7 +33,8 @@ export class TaskChartComponent implements OnInit, OnChanges {
   public chartLabels: string[] = ['Completa', 'Pendente'];
   public chartDetails: ApexChart = {
     type: this.chartType,
-    width: 380,
+    width: '100%',
+    height: '100%'
   };
   public chartTitleConfig: ApexTitleSubtitle = {
     text: this.chartTitle,
@@ -41,10 +42,11 @@ export class TaskChartComponent implements OnInit, OnChanges {
   };
   public chartResponsive: ApexResponsive[] = [
     {
-      breakpoint: 480,
+      //breakpoint: 480,
       options: {
         chart: {
-          width: 300,
+          width: '100%',
+          height: '500%'
         },
         legend: {
           position: this.legendPosition,

@@ -5,8 +5,8 @@ import { Action, Store } from '@ngrx/store';
 import { AuthService } from "../../services/auth.service";
 import * as AuthActions from '../actions/auth.action';
 import { catchError, map, mergeMap, Observable, of, switchMap } from "rxjs";
-import { SuccessResponse } from "../models/successResponse";
-import { AuthResponse, CreateUserData, LoggedUser, LoginUserData } from "../models/auth.model";
+import { SuccessResponse } from "../../models/successResponse";
+import { AuthResponse, CreateUserData, LoggedUser, LoginUserData } from "../../models/auth.model";
 import { ApiService } from "../../http/api.service";
 
 @Injectable()

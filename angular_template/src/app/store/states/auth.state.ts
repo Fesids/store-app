@@ -1,4 +1,4 @@
-import { LoggedUser } from "../models/auth.model";
+import { LoggedUser } from "../../models/auth.model";
 
 
 export interface AuthState {

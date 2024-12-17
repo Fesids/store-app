@@ -7,16 +7,17 @@ import { TaskListContainerComponent } from '../../shared/components/task/list-co
 import { TaskChartComponent } from '../../shared/charts/task-chart/task-chart.component';
 import { BoxComponent } from '../../shared/components/boxComponent/box.component';
 import { PaginatedResponse } from '../../shared/components/interfaces/paginatedResponse';
-import { TaskModel } from '../../store/models/task.model';
+import { TaskModel } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
-import { SuccessResponse } from '../../store/models/successResponse';
+import { SuccessResponse } from '../../models/successResponse';
+import { CardContainerComponent } from '../../shared/components/cardComponent/cardsContainer/card-container.component';
 
 @Component({
   standalone: true,
   styleUrls: ["./home.component.scss"],
   templateUrl: "./home.component.html",
-  imports: [BoxComponent, HeaderComponent, TaskListContainerComponent, TaskChartComponent, CommonModule],
+  imports: [BoxComponent, HeaderComponent, TaskListContainerComponent, TaskChartComponent, CommonModule, CardContainerComponent],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   @Input() title = "Home";

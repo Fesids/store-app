@@ -12,6 +12,7 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
     imports: [TaskListcomponent, CustomButtonComponent]
 })
 export class TaskListContainerComponent {
+    
     urgentSvg: SafeHtml;
     latestSvg: SafeHtml;
   

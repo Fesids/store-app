@@ -3,16 +3,25 @@
    
   
     <div class="home-page-content lg:px-12 md:px-8 sm:px-4">
-      <app-task-list-container></app-task-list-container>
+
+      <app-card-container></app-card-container>
+      <div class="home-page-content__graphics">
+        <div class="w-[700px]">
+          <app-task-list-container></app-task-list-container>
+        </div>
+       
       
-      <div class="app-chart-wrapper">
-        <app-task-chart
-        [tasks]="(tasksArray$ | async) || []"
-        chartType="donut"
-        chartTitle="Progressão das tarefas"
-        [colors]="['rgb(79, 70, 229)', '#FF5722']">
-        </app-task-chart>
+        <div class="app-chart-wrapper">
+          <app-task-chart
+          [tasks]="(tasksArray$ | async) || []"
+          chartType="donut"
+          chartTitle="Progressão das tarefas"
+          [colors]="['rgb(79, 70, 229)', '#FF5722']">
+          </app-task-chart>
+        </div>
       </div>
+      
+    
       
 
     </div>

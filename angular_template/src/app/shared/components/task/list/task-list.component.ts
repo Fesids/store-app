@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PaginatedListComponent } from "../../paginated/list/paginated-list.component";
 import { PaginatedResponse } from "../../interfaces/paginatedResponse";
-import { TaskModel } from "../../../../store/models/task.model";
+import { TaskModel } from "../../../../models/task.model";
 import { TaskService } from "../../../../services/task.service";
 import { response } from "express";
 import { CommonModule } from "@angular/common";

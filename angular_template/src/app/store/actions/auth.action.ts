@@ -1,6 +1,6 @@
 import {Action, createAction, props} from "@ngrx/store"
-import { SuccessResponse, SuccessResponseTeste } from "../models/successResponse";
-import { AuthResponse, CreateUserData, LoggedUser, LoginUserData } from "../models/auth.model";
+import { SuccessResponse, SuccessResponseTeste } from "../../models/successResponse";
+import { AuthResponse, CreateUserData, LoggedUser, LoginUserData } from "../../models/auth.model";
 import { error } from "console";
 
 export const loginRequested = createAction(

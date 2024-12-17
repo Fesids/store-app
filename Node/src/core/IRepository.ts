@@ -12,6 +12,8 @@ export interface IRepository<T> {
     delete(id: string): Promise<void>;
     updateOneById(id: string, updates: Partial<T>): Promise<void>;
     updateManyByParams(params: Record<string, any>, updates: Partial<T>): Promise<void>;
-    countByCriteria(criteria: Record<string, any>): Promise<number>
+    countByCriteria(criteria: Record<string, any>): Promise<number>;
+    aggregate(pipeline: any[]): Promise<any[]>;
+
 
 }
