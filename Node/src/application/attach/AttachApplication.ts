@@ -3,6 +3,7 @@ import { TYPES } from "../../constants/types";
 import { IAttachRepository } from "../../domain/attach/IAttachRepository";
 import { AttachDto } from "./dtos/AttachDto";
 import { Attach } from "../../domain/attach/Attach";
+import { Pagination } from "../../shared/pagination/Pagination";
 
 
 
@@ -28,6 +29,13 @@ export class AttachApplication {
         await this.attachRepository.save(attach);
        
     }
+
+    async getAttachments(): Promise<any> {
+
+      const attachments = await this.attachRepository.findAll();
+
+      return attachments;
+  }
 
 
     async getAttachmentsSummaryByTask(taskId: string): Promise<any> {

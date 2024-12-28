@@ -39,7 +39,7 @@ export class TaskDetailPageComponent implements OnInit {
         .subscribe(
             (response) => {
                 this.taskDetails = response.data;
-                console.log("Task detail : ", this.taskDetails);
+             
             },
             (error) => {
                 console.log("Failed to load task", error)
@@ -53,10 +53,10 @@ export class TaskDetailPageComponent implements OnInit {
         .subscribe(
             (response) => {
                 this.taskAttachmentsSumarru = response.data;
-                console.log("Summary : ", response.data)
+                
             },
             (error) => {
-                console.log("Failed to load task", error)
+                
             }
         )
     }

@@ -3,6 +3,7 @@ import { HomePageComponent } from './pages/home/home.component';
 import { LoginPageComponent } from './pages/login/login.component';
 import { SignupPageComponent } from './pages/signUp/signup.component';
 import { TaskDetailPageComponent } from './pages/task/detail/taskDetailPage.component';
+import { TaskAttachmentsPageComponent } from './pages/task/attachments/attachments-page.component';
 
 export const routes: Routes = [
 
@@ -25,9 +26,15 @@ export const routes: Routes = [
     // *** Task routes ***//
 
     {
-        path: "task/:id_task",
+        path: "tarefa/:id_task",
         component: TaskDetailPageComponent
 
+    },
+
+    // ** attachments
+    {
+        path: "tarefa/:id_task/anexos",
+        component: TaskAttachmentsPageComponent
     }
 
 ];

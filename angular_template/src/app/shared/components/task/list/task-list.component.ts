@@ -6,6 +6,7 @@ import { TaskService } from "../../../../services/task.service";
 import { response } from "express";
 import { CommonModule } from "@angular/common";
 import { Observable } from "rxjs";
+import { Route, Router } from "@angular/router";
 
 @Component({
     standalone: true,
@@ -18,7 +19,7 @@ export class TaskListcomponent implements OnInit{
 
         tasks$: Observable<PaginatedResponse<TaskModel>>;
 
-        constructor(private taskService: TaskService) {
+        constructor(private taskService: TaskService, private router:Router) {
           this.tasks$ = this.taskService.tasks$;
         }
       
@@ -26,7 +27,10 @@ export class TaskListcomponent implements OnInit{
           this.taskService.loadTasks();
           console.log(this.tasks$) // this is my debug
         }*/
-        
+          goToTask(taskId: string): void {
+            this.router.navigate([`/tarefa/${taskId}`])
+          }
+
           ngOnInit(): void {
             const defaultEmployeeId = "86db2f60-bbd8-4ad8-b80d-4ea84e37865f";
             this.taskService.loadPaginatedTasks({}, 1, 5, defaultEmployeeId); 
