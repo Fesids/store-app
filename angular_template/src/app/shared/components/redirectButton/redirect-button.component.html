@@ -1,0 +1,14 @@
+
+<app-custom-button
+label="Voltar"
+[iconSvg]="arrowSvg"
+bgColor="bg-indigo-600"
+hoverBgColor="hover:bg-indigo-500"
+textColor="text-white"
+hoverTextColor="hover:text-black"
+[onClick]="onRedirect">
+</app-custom-button> <!-- not working, throw redirectFunction is not provided or is nul-->
+
+<div (click)="onRedirect()"> <!-- Working fine -->
+    Teste volta
+</div>

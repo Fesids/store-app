@@ -13,15 +13,22 @@
   <span class="text-sm font-medium hidden md:block" *ngIf="label">{{ label }}</span>
 </a>-->
 
-<a [href]="link"
+<a *ngIf="link"
+   [routerLink]="link"
    class="p-2 border border-slate-200 rounded-md inline-flex space-x-1 items-center 
           {{ bgColor }} {{ hoverBgColor }} {{ textColor }} {{ hoverTextColor }} {{ additionalClasses }}">
-  <!-- Render SVG if provided -->
   <span *ngIf="iconSvg" [innerHTML]="iconSvg"></span>
-
-  <!-- Render Image if provided -->
   <img *ngIf="iconImg" [src]="iconImg" alt="icon" class="w-4 h-4" />
-
-  <!-- Render label text -->
   <span class="text-sm font-medium hidden md:block" *ngIf="label">{{ label }}</span>
 </a>
+
+
+<button *ngIf="!link" (click)="handleClick()" 
+        class="p-2 border border-slate-200 rounded-md inline-flex space-x-1 items-center 
+               {{ bgColor }} {{ hoverBgColor }} {{ textColor }} {{ hoverTextColor }} {{ additionalClasses }}">
+  <span *ngIf="iconSvg" [innerHTML]="iconSvg"></span>
+  <img *ngIf="iconImg" [src]="iconImg" alt="icon" class="w-4 h-4" />
+  <span class="text-sm font-medium hidden md:block" *ngIf="label">{{ label }}</span>
+</button>
+<!-- In CustomButtonComponent's template -->
+

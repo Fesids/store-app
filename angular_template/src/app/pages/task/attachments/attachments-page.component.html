@@ -1,7 +1,18 @@
 <div id="task-attachments-page">
     <app-header-component></app-header-component>
     <div>
-        <h1>Ok attach</h1>
+        
+        
+        <app-custom-button
+        label="Voltar"
+        [iconSvg]="arrowSvg"
+        bgColor="bg-indigo-600"
+        hoverBgColor="hover:bg-indigo-500"
+        textColor="text-white"
+        hoverTextColor="hover:text-black"
+        [onClick]="performRedirect">
+        </app-custom-button>
+        <button class="bg-red-600" (click)="performRedirect()"> Teste</button>
         <app-attchments-list [data]=" taskAttachments" ></app-attchments-list>
     </div>
 </div>

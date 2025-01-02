@@ -19,5 +19,15 @@ export class CustomButtonComponent {
     @Input() textColor: string = 'text-white'; 
     @Input() hoverTextColor: string = 'hover:text-white'; 
     @Input() additionalClasses: string = ''; 
-    @Input() link: string = '#';
+    @Input() link?: string;
+    @Input() onClick?: (() => void) | null = null 
+
+
+    handleClick(): void {
+        if (this.onClick) {
+          this.onClick();  // Call the provided function
+        } else {
+          console.error('onClick is not provided or is null.');
+        }
+      }
 }
