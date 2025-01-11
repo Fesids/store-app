@@ -8,6 +8,7 @@ export interface IUserProps {
     firstName: string;
     lastName: string;
     password: string;
+    roles: Array<string>;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -19,8 +20,9 @@ export class User extends Entity<IUserProps> implements IAggregateRoot {
     private _password: string;
     private _createdAt: Date;
     private _updatedAt: Date;
+    private _roles: Array<string>;
 
-    constructor({email, firstName, lastName, password, createdAt, updatedAt}: IUserProps, guid?: string){
+    constructor({email, firstName, lastName, password, createdAt, updatedAt, roles}: IUserProps, guid?: string){
         super(guid);
         this._email = email;
         this._firstName = firstName;
@@ -28,6 +30,7 @@ export class User extends Entity<IUserProps> implements IAggregateRoot {
         this._password = password;
         this._createdAt = createdAt;
         this._updatedAt = updatedAt;
+        this._roles = roles;
     }
 
     get email() {
@@ -52,6 +55,10 @@ export class User extends Entity<IUserProps> implements IAggregateRoot {
 
     get updatedAt() {
         return this._updatedAt;
+    }
+
+    get roles() {
+        return this._roles;
     }
 
     public static create(props: IUserProps, guid?: string) {

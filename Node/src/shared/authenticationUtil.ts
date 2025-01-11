@@ -8,6 +8,7 @@ interface JwtPayloadExtended extends JwtPayload {
     firstName: string;
     lastName: string;
     email: string;
+    roles: Array<string>
 }
 
 const validate = {
@@ -47,7 +48,8 @@ const getJwtToken = (jwtPayload: JwtPayloadExtended): string => {
             guid: jwtPayload.guid,
             firstName: jwtPayload.firstName,
             lastName: jwtPayload.lastName,
-            email: jwtPayload.email
+            email: jwtPayload.email,
+            roles: jwtPayload.roles
         
         },
         config.JWT_SECRET as string,
@@ -60,7 +62,7 @@ const saveCookie = (
     key: string,
     value: string
 ): void => {
-    res.cookie(key, value, {httpOnly: true, maxAge: config.JWT_EXPIRY * 100});
+    res.cookie(key, value, {httpOnly: true, maxAge: config.JWT_EXPIRY * 100, path:"/"});
 }
 
 const verifyJwtToken = (token: string): JwtPayloadExtended => {

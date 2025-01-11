@@ -4,5 +4,6 @@ export interface SignUpDto {
     firstName: string,
     lastName: string,
     password: string
-    rePassword: string
+    rePassword: string,
+    roles: Array<string>
 }

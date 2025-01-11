@@ -4,6 +4,7 @@ import { TYPES } from "../../../constants/types";
 import { AuthApplication } from "../../../application/auth/AuthApplication";
 import {Request, Response} from "express";
 import { ok } from "../processors/response";
+import { saveCookie } from "../../../shared/authenticationUtil";
 
 
 @controller("/api/v1/auth")
@@ -17,6 +18,7 @@ export class AuthController implements interfaces.Controller{
     @httpPost("/signUp")
     async signUpUser(@request() req: Request, @response() res: Response) {
         const {body} = req;
+        console.log(body)
         const user = await this.service.signUpUser(body);
 
         return res.json({
@@ -28,7 +30,12 @@ export class AuthController implements interfaces.Controller{
     @httpPost("/login")
     async loginUser(@request() req: Request, @response() res: Response) {
         const {body} = req;
+        //console.log(body)
         const user = await this.service.loginUser(body);
+
+        //console.log(user["token"])
+
+        saveCookie(res, "auth_cookie", user["token"])
 
         return res.json(ok(user, 'User logged in successfully'))
 

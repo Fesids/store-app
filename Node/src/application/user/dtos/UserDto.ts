@@ -5,6 +5,7 @@ export class UserDto {
         public firstName: string,
         public lastName: string,
         public password: string,
+        public roles: Array<string>,
         public createdAt: Date,
         public updatedAt: Date,
     ){}

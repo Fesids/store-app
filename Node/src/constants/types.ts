@@ -29,6 +29,14 @@ export const TYPES = {
 
     AttachApplication: Symbol('AttachApplication'),
 
-    AttachRepository: Symbol('AttachRepository')
+    AttachRepository: Symbol('AttachRepository'),
+
+    // ** ROLE
+
+    RoleDataMapper: Symbol('RoleDataMapper'),
+
+    RoleApplication: Symbol('RoleApplication'),
+
+    RoleRepository: Symbol('RoleRepository'),
     
 }

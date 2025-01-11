@@ -55,8 +55,8 @@ export class LoginPageComponent implements OnInit{
             .subscribe({
               next: (response) => {
                 const token = response.data?.token || "";
-                setTokenCookie(token); 
-                console.log('Token saved:', token);
+                //Consertei o back setTokenCookie(token); 
+                //console.log('Token saved:', token);
               },
               error: (err) => {
                 console.error('Error:', err);

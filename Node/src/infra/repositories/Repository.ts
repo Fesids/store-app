@@ -21,6 +21,15 @@ export class Repository<IDomainEntity> implements IRepository<IDomainEntity> {
         this.dataMapper = dataMapper;
     }
 
+
+    async findFieldValue(lookupField: string, lookupValue: any, targetField: string): Promise<any | null> {
+       const projection = {[targetField]: 1, _id:0};
+       const result = await this.collectionInstance.findOne({[lookupField]: lookupValue}, {projection});
+
+
+       return result ? result[targetField] : null;
+    }
+
     async aggregate(pipeline: any[]): Promise<any[]> {
         try {
             return await this.collectionInstance.aggregate(pipeline).toArray();
@@ -29,6 +38,8 @@ export class Repository<IDomainEntity> implements IRepository<IDomainEntity> {
             throw error;
         }
     }
+
+    
 
     async findAllByParams(params: Record<string, any>, pagination?: Pagination): Promise<IDomainEntity | any> {
 

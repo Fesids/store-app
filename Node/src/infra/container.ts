@@ -19,6 +19,10 @@ import { Attach } from "../domain/attach/Attach";
 import { AttachDataMapper } from "./dataMapper/AttachDataMapper";
 import { IAttachRepository } from "../domain/attach/IAttachRepository";
 import { AttachRepository } from "./repositories/AttachRepository";
+import { Role } from "../domain/role/Role";
+import { RoleDataMapper } from "./dataMapper/RoleDataMapper";
+import { IRoleRepository } from "../domain/role/IRoleRepository";
+import { RoleRepository } from "./repositories/RoleRepository";
 
 export const infraestructureContainerModule = new AsyncContainerModule(async(bind: interfaces.Bind) =>{
     const db: Db = await createMongodbConnection(config.MONGODB_URI, {});
@@ -38,5 +42,10 @@ export const infraestructureContainerModule = new AsyncContainerModule(async(bin
 
     bind<IDataMapper<Attach>>(TYPES.AttachDataMapper).to(AttachDataMapper);
     bind<IAttachRepository>(TYPES.AttachRepository).to(AttachRepository);
+
+    // ** Role
+
+    bind<IDataMapper<Role>>(TYPES.RoleDataMapper).to(RoleDataMapper);
+    bind<IRoleRepository>(TYPES.RoleRepository).to(RoleRepository);
 
 } )
