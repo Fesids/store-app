@@ -13,22 +13,22 @@ export class NavigationService implements OnInit {
 
   ngOnInit() {
     if (typeof window !== 'undefined' && window.localStorage) {
-      // Check if there is a saved history in localStorage
+    
       const savedHistory = localStorage.getItem('navigationHistory');
       if (savedHistory) {
         this.history = JSON.parse(savedHistory);
       }
 
-      // Subscribe to router events to track navigation
+      
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           const currentUrl = event.urlAfterRedirects;
 
-          // Avoid adding duplicate consecutive entries
+          
           if (this.history.length === 0 || this.history[this.history.length - 1] !== currentUrl) {
             this.history.push(currentUrl);
 
-            // Save the updated history to localStorage
+           
             localStorage.setItem('navigationHistory', JSON.stringify(this.history));
           }
 

@@ -12,6 +12,7 @@ import { TaskService } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
 import { SuccessResponse } from '../../models/successResponse';
 import { CardContainerComponent } from '../../shared/components/cardComponent/cardsContainer/card-container.component';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   standalone: true,
@@ -27,7 +28,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   completedTasksCount$: Observable<number>;
   notCompletedTasksCount$: Observable<number>;
 
-  constructor(private taskService: TaskService, private dialog: MatDialog) {
+  constructor(private taskService: TaskService, /*private tokenService: TokenService,*/ private dialog: MatDialog) {
     this.tasks$ = this.taskService.allTasks$;
 
     this.tasksArray$ = this.tasks$.pipe(
@@ -46,6 +47,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const defaultEmployeeId = "86db2f60-bbd8-4ad8-b80d-4ea84e37865f";
     this.taskService.loadTasksById(defaultEmployeeId);
+
+    //console.log(this.tokenService.getUserInfo());
   }
 
   onPageChange(newPage: number): void {
