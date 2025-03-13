@@ -1,7 +1,8 @@
 #!/bin/sh
 
-# Replace the placeholder in main.*.js or any generated JS bundle
-# We look for "API_URL_PLACEHOLDER" and replace it with $API_URL
-sed -i "s|API_URL_PLACEHOLDER|${API_URL}|g" /usr/share/nginx/html/*.js
+# Replace $API_URL placeholder in index.html using environment variables
+envsubst '$API_URL' < /usr/share/nginx/html/index.html > /usr/share/nginx/html/index.html.tmp
+mv /usr/share/nginx/html/index.html.tmp /usr/share/nginx/html/index.html
 
+# Start Nginx
 exec "$@"

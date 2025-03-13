@@ -49,7 +49,8 @@ const initialise = async () => {
     // CORS Handling
     app.use((req: Request, res: Response, next: NextFunction) => {
 
-      const allowedOrigins = ['http://localhost:4200']; 
+      const allowedOrigins = ['http://localhost:4200', process.env.API_URL, process.env.CORS_URL];
+      console.log("Teste",process.env.CORS_URL) 
       const origin = req.headers.origin;
   
       if (origin && allowedOrigins.includes(origin)) {

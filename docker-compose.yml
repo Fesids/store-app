@@ -14,7 +14,8 @@ services:
     ports: 
       - "81:80"
     environment:
-      - API_URL=http://backend:3000
+      - API_URL=http://localhost:3000/api/v1
+      - CORS_URL=http://localhost:81
 
 
 networks:

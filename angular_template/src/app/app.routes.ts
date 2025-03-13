@@ -14,19 +14,19 @@ export const routes: Routes = [
     {
         path: "",
         component: HomePageComponent,
-        //canActivate: [authGuard]
+        canActivate: [authGuard]
     },
 
     {
         path: "login",
         component: LoginPageComponent,
-        //canActivate: [loginGuard]
+        canActivate: [loginGuard]
     },
 
     {
         path: "signup",
         component: SignupPageComponent,
-        //canActivate: [loginGuard]
+        canActivate: [loginGuard]
 
     },
 
@@ -36,7 +36,7 @@ export const routes: Routes = [
     {
         path: "tarefa/:id_task",
         component: TaskDetailPageComponent,
-        //canActivate: [authGuard]
+        canActivate: [authGuard]
 
     },
 
@@ -44,7 +44,7 @@ export const routes: Routes = [
     {
         path: "tarefa/:id_task/anexos",
         component: TaskAttachmentsPageComponent,
-        //canActivate: [authGuard]
+        canActivate: [authGuard]
     },
 
     {
