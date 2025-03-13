@@ -1,6 +1,20 @@
 <div id="home-page">
     <app-header-component></app-header-component>
+
    
+
+    <div *ngIf="loading$ | async">
+      Loading user data...
+    </div>
+    
+    <div *ngIf="error$ | async as error" class="error">
+      Error: {{ error | json }}
+    </div>
+    
+    <div *ngIf="user$ | async as user" class="lg:px-12 mt-2 mb-2">
+      <h1>BEM VINDO {{ user.firstName }}!</h1>
+     
+    </div>
   
     <div class="home-page-content lg:px-12 md:px-8 sm:px-4">
 

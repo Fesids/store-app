@@ -6,6 +6,9 @@ import { AuthApplication } from './auth/AuthApplication';
 import { TaskApplication } from './task/TaskApplication';
 import { AttachApplication } from './attach/AttachApplication';
 import { RoleApplication } from './role/RoleApplication';
+import { DepartmentApplication } from './department/DepartmentApplication';
+import { CompanyApplication } from './company/CompanyApplication';
+import { MembershipApplication } from './membership/MembershipApplication';
 
 export const applicationContainerModule = new ContainerModule(
     (
@@ -17,5 +20,8 @@ export const applicationContainerModule = new ContainerModule(
         bind<TaskApplication>(TYPES.TaskApplication).to(TaskApplication);
         bind<AttachApplication>(TYPES.AttachApplication).to(AttachApplication);
         bind<RoleApplication>(TYPES.RoleApplication).to(RoleApplication);
+        bind<DepartmentApplication>(TYPES.DepartmentApplication).to(DepartmentApplication);
+        bind<CompanyApplication>(TYPES.CompanyApplication).to(CompanyApplication);
+        bind<MembershipApplication>(TYPES.MembershipApplication).to(MembershipApplication)
     }
 ) 

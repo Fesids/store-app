@@ -5,7 +5,7 @@ import { SuccessResponse } from "../models/successResponse";
 import { AuthResponse, LoginUserData } from "../models/auth.model";
 import { PaginatedResponse } from "../shared/components/interfaces/paginatedResponse";
 import { TaskModel } from "../models/task.model";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { TaskStatistics } from "../models/task-statistics.model";
 
 
@@ -48,33 +48,39 @@ export class TaskService {
           });
         }
     
-      loadPaginatedTasks(criteria: any = {}, page = 1, pageSize = 5, employees?: string): void {
-        //const params = { ...criteria, page, pageSize, employees };
-        /*this.http.get<PaginatedResponse<TaskModel>>(`http://localhost:3000/api/v1/tasks`, { params }).subscribe({
-          next: (response) => this.tasksSubject.next(response),
-          error: (err) => console.error('Error loading tasks', err),
-        });*/
-
-        const params = {
-            ...criteria,
-            page,
-            pageSize,
-            ...(employees ? { employees } : {}) 
-        };
-
-        console.log(params)
     
 
-        this.apiService.get<PaginatedResponse<TaskModel>>("/tasks", params).subscribe({
-            next: (response) => this.tasksSubject.next(response),
-            error: (err) => console.error('Error loading tasks', err),
-          });
-      }
+          loadPaginatedTasks(
+            criteria: any = {},
+            page = 1,
+            pageSize = 5,
+            departments?: string[],
+            employees?: string,
+           
+          ): void {
+            // Cria um objeto com os parâmetros básicos, mantendo também a propriedade "employees"
+            let paramsObj: any = {
+              ...criteria,
+              page,
+              pageSize,
+              ...(employees ? { employees } : {})
+            };
+          
+            // Se houver departments, converte o array em uma string separada por vírgulas
+            if (departments && departments.length > 0) {
+              paramsObj.departments = departments.join(',');
+            }
+          
+            const params = new HttpParams({ fromObject: paramsObj });
+          
+            this.apiService.get<PaginatedResponse<TaskModel>>('/tasks', params).subscribe({
+              next: (response) => this.tasksSubject.next(response),
+              error: (err) => console.error('Error loading tasks', err),
+            });
+          }
+          
       
     
-      /*get tasks$(): Observable<PaginatedResponse<TaskModel>> {
-        return this.tasksSubject.asObservable();
-      }*/
     
       get completedTasksCount$(): Observable<number> {
         return this.tasks$.pipe(
@@ -88,34 +94,5 @@ export class TaskService {
         );
       }
     
-      /*loadTasks(criteria: any = {}, page: number = 1, pageSize: number = 5): void {
-        this.apiService.get<PaginatedResponse<TaskModel>>(`/tasks?employees=86db2f60-bbd8-4ad8-b80d-4ea84e37865f&page=${page}&pageSize=${pageSize}`)
-          .subscribe((response) => this.tasksSubject.next(response));
-      }*/
-
-          /*loadTasks(criteria: any = {}, page: number = 1, pageSize: number = 5): void {
-            this.apiService
-              .get<PaginatedResponse<TaskModel>>(`/tasks?employees=86db2f60-bbd8-4ad8-b80d-4ea84e37865f&page=${page}&pageSize=${pageSize}`)
-              .pipe(
-                map(response => ({
-                  ...response,
-                  data: Array.isArray(response.data) ? response.data : [] 
-                }))
-              )
-              .subscribe({
-                next: response => this.tasksSubject.next(response),
-                error: err => console.error('Error loading tasks', err)
-              });
-          }*/
-          
-
-
-    /*retrievePaginatedTasks(criteria: any, page: number, pageSize: number): Observable<PaginatedResponse<TaskModel>>{
-        return this.apiService.get<PaginatedResponse<TaskModel>>(`/tasks?employees=86db2f60-bbd8-4ad8-b80d-4ea84e37865f&page=${page}&pageSize=${pageSize}`)
-        //return this.apiService.post<any, any>("/auth/login", data)
-        /*.pipe(
-            tap(data => console.log(JSON.stringify(data)))
-            
-        )
-    }   */
+      
 }

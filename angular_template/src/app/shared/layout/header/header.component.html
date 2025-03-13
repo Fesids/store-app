@@ -34,29 +34,29 @@
                 class="hidden lg:flex flex-row items-start justify-between gap-y-4 w-2/3 pr-12"
             >
                 <ul class="flex flex-row items-center gap-x-6">
-                    <li class="hover:underline cursor-pointer">Tarefas</li>
+                    <li class="hover:underline cursor-pointer" (click)="redirectTo('/tarefas')">Tarefas</li>
                     <li class="hover:underline cursor-pointer">Notificações</li>
                     <li class="hover:underline cursor-pointer">Perfil</li>
                 </ul>
 
                 <div class="inline-flex space-x-2 items-center">
                     <app-custom-button
-                        [label]="'Login'"
-                        [bgColor]="'bg-white'"
-                        [hoverBgColor]="'hover:bg-slate-200'"
-                        [textColor]="'text-black'"
-                        [hoverTextColor]="'hover:text-indigo-400'"
-                        (click)="redirectTo('/login'); $event.preventDefault()"
-                    ></app-custom-button>
-
-                    <app-custom-button
-                        [label]="'Registrar'"
-                        [bgColor]="'bg-indigo-600'"
-                        [hoverBgColor]="'hover:bg-indigo-500'"
-                        [textColor]="'text-white'"
-                        [hoverTextColor]="'hover:text-black'"
-                        (click)="redirectTo('/signup'); $event.preventDefault()"
-                    ></app-custom-button>
+                    [label]="'Login'"
+                    [bgColor]="'bg-white'"
+                    [hoverBgColor]="'hover:bg-slate-200'"
+                    [textColor]="'text-black'"
+                    [hoverTextColor]="'hover:text-indigo-400'"
+                    [onClick]="redirectTo.bind(this, '/login')"
+                ></app-custom-button>
+            
+                <app-custom-button
+                    [label]="'Registrar'"
+                    [bgColor]="'bg-indigo-600'"
+                    [hoverBgColor]="'hover:bg-indigo-500'"
+                    [textColor]="'text-white'"
+                    [hoverTextColor]="'hover:text-black'"
+                    [onClick]="redirectTo.bind(this, '/signup')"
+                ></app-custom-button>
                 </div>
             </div>
 

@@ -1,0 +1,22 @@
+
+services:
+  backend: 
+    build: ./node
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URL=mongodb://admin:67890000@my-mongo:27017/
+    networks:
+      - task-network
+
+  frontend: 
+    build: ./angular_template
+    ports: 
+      - "81:80"
+    environment:
+      - API_URL=http://backend:3000
+
+
+networks:
+  task-network:
+    external: true

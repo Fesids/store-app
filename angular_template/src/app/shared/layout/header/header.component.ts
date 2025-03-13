@@ -23,4 +23,8 @@ export class HeaderComponent{
     redirectTo(route: string): void {
         this.router.navigate([route]);
     }
+
+    teste(): void {
+        alert("Teste")
+    }
 }

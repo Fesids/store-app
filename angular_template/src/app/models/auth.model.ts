@@ -6,6 +6,17 @@ export interface LoggedUser {
     password: string
 }
 
+export interface LoggedUserInfo {
+    guid: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    roles: Array<string>;
+    companyId: string;
+    departmentId: Array<string>;
+
+  
+}
 
 export interface AuthResponse {
     

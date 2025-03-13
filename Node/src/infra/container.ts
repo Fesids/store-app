@@ -23,6 +23,19 @@ import { Role } from "../domain/role/Role";
 import { RoleDataMapper } from "./dataMapper/RoleDataMapper";
 import { IRoleRepository } from "../domain/role/IRoleRepository";
 import { RoleRepository } from "./repositories/RoleRepository";
+import { Department } from "../domain/department/Department";
+import { DepartmentDataMapper } from "./dataMapper/DepartmentDataMapper";
+import { IDepartmentRepository } from "../domain/department/IDepartmentRepository";
+import { DepartmentRepository } from "./repositories/DepartmentRepository";
+import { Company } from "../domain/company/Company";
+import { CompanyDataMapper } from "./dataMapper/CompanyDataMapper";
+import { ICompanyRepository } from "../domain/company/ICompanyRepository";
+import { CompanyRepository } from "./repositories/CompanyRepository";
+import { Membership } from "../domain/membership/Membership";
+import { MembershipDataMapper } from "./dataMapper/MembershipDataMapper";
+import bodyParser from "body-parser";
+import { IMembershipRepository } from "../domain/membership/IMembershipRepository";
+import { MembershipRepository } from "./repositories/MembershipRepository";
 
 export const infraestructureContainerModule = new AsyncContainerModule(async(bind: interfaces.Bind) =>{
     const db: Db = await createMongodbConnection(config.MONGODB_URI, {});
@@ -47,5 +60,20 @@ export const infraestructureContainerModule = new AsyncContainerModule(async(bin
 
     bind<IDataMapper<Role>>(TYPES.RoleDataMapper).to(RoleDataMapper);
     bind<IRoleRepository>(TYPES.RoleRepository).to(RoleRepository);
+
+    // ** department
+
+    bind<IDataMapper<Department>>(TYPES.DepartmentDataMapper).to(DepartmentDataMapper);
+    bind<IDepartmentRepository>(TYPES.DepartmentRepository).to(DepartmentRepository);
+
+    // ** company
+
+    bind<IDataMapper<Company>>(TYPES.CompanyDataMapper).to(CompanyDataMapper);
+    bind<ICompanyRepository>(TYPES.CompanyRepository).to(CompanyRepository);
+
+    // ** membership
+
+    bind<IDataMapper<Membership>>(TYPES.MembershipDataMapper).to(MembershipDataMapper);
+    bind<IMembershipRepository>(TYPES.MembershipRepository).to(MembershipRepository);
 
 } )

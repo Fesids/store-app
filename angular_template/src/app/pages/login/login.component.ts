@@ -2,12 +2,15 @@ import { Component, OnInit } from "@angular/core";
 import { GenericFormComponent } from "../../shared/components/generic-form/genericForm.component";
 import { FormField } from "../../shared/components/interfaces/formField";
 import { AuthService } from "../../services/auth.service";
-import { tap } from "rxjs";
+import { catchError, filter, first, of, tap, timeout } from "rxjs";
 import { setTokenCookie } from "../../shared/utils/setCookie";
 import { PageTitleComponent } from "../../shared/components/page-title/page-title.component";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../store/states/app.state";
+import { selectUser } from "../../store/selectors/auth.selector";
+import { TokenService } from "../../services/tokenService";
+import { loadUser } from "../../store/actions/auth.action";
 
 
 @Component({
@@ -20,7 +23,7 @@ import { AppState } from "../../store/states/app.state";
 })
 export class LoginPageComponent implements OnInit{
 
-    constructor(private readonly authService: AuthService, private router: Router){}
+    constructor(private readonly authService: AuthService, private router: Router, private store: Store, private tokenService: TokenService){}
 
     loginFields: FormField[] = [
         { name: 'email', label: 'Email', placeholder: 'Enter your email', type: 'email' },
@@ -31,32 +34,27 @@ export class LoginPageComponent implements OnInit{
         this.router.navigate(['/signup'])
       }
     
-      /*onSubmit(data: any) {
-        console.log('Login data:', data);
-        this.authService.loginUser(data)
-      .pipe(
-          tap(data => console.log('Response:', data.data))
-         
-        )
-        .subscribe({
-          next: (data) => setTokenCookie(data.data?.token || ""),
-          error: (err) => console.error('Error:', err),
-          complete: () => console.log('Request complete.')
-        });
-       
-      }*/
+      // login.component.ts
+// login.component.ts
+
 
         onSubmit(data: any) {
-          console.log('Login data:', data);
+          //console.log('Login data:', data);
           this.authService.loginUser(data)
             .pipe(
-              tap(data => console.log('Response:', data.data))
+              tap(data => {
+                //console.log('Response:', data.data)
+              
+                //this.authService.loadUserInfo()
+                this.store.dispatch(loadUser());
+              }
+            
+            )
             )
             .subscribe({
               next: (response) => {
                 const token = response.data?.token || "";
-                //Consertei o back setTokenCookie(token); 
-                //console.log('Token saved:', token);
+               
               },
               error: (err) => {
                 console.error('Error:', err);

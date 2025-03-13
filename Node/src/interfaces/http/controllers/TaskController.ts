@@ -54,39 +54,50 @@ export class TaskController implements interfaces.Controller{
         }
     }*/
 
-    @httpGet('')
-    async getTasksByCriteria(@request() req: Request, @response() res: Response, next: NextFunction) {
-        try {
+        @httpGet('')
+        async getTasksByCriteria(
+          @request() req: Request,
+          @response() res: Response,
+          next: NextFunction
+        ) {
+          try {
             const criteria: Record<string, any> = { ...req.query };
             const page = parseInt(req.query.page as string) || 1;
             const pageSize = parseInt(req.query.pageSize as string) || 10;
-            const pagination: Pagination = {page, pageSize};
-
+            const pagination: Pagination = { page, pageSize };
+        
             delete criteria.page;
             delete criteria.pageSize;
-    
-
+        
+            // Process departments: allow comma-separated string
             if (criteria.departments) {
-                if (typeof criteria.departments === 'string') {
-                    criteria.departments = [criteria.departments];
-                } else if (Array.isArray(criteria.departments)) {
-                    
-                    criteria.departments = [...new Set(criteria.departments.filter((dep): dep is string => typeof dep === 'string'))];
-                }
+              if (typeof criteria.departments === 'string') {
+                // Split the string by commas and trim any extra whitespace
+                criteria.departments = criteria.departments.split(',').map(dep => dep.trim());
+              } else if (Array.isArray(criteria.departments)) {
+                // In case it's an array (from some query parsers) and elements may be comma separated
+                criteria.departments = criteria.departments
+                  .flatMap(dep => (typeof dep === 'string' ? dep.split(',') : []))
+                  .map(dep => dep.trim());
+              }
+              // Remove duplicates if needed
+              criteria.departments = [...new Set(criteria.departments)];
             }
-    
-         
+        
             if (typeof criteria.completed === 'string') {
-                criteria.completed = criteria.completed === 'true';
+              criteria.completed = criteria.completed === 'true';
             }
-    
-            const tasks = await this.service.getTasksByCriterias(criteria ,pagination);
-            tasks.data = removeUnderscoresFromPaginated(tasks.data)
+        
+            console.log('Final criteria:', criteria);
+        
+            const tasks = await this.service.getTasksByCriterias(criteria, pagination);
+            tasks.data = removeUnderscoresFromPaginated(tasks.data);
             return res.json(ok(tasks, 'Success'));
-        } catch (error) {
+          } catch (error) {
             next(error);
+          }
         }
-    }
+        
 
     
     @httpGet("/:id")
@@ -95,6 +106,7 @@ export class TaskController implements interfaces.Controller{
             const task = await this.service.getTaskById(req.params.id);
             return res.json(ok(task, `task with ${req.params.id} retrived successfully`))
         } catch (error) {
+            console.log(error)
             next(error);
         }
     }

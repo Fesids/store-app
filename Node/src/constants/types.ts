@@ -38,5 +38,36 @@ export const TYPES = {
     RoleApplication: Symbol('RoleApplication'),
 
     RoleRepository: Symbol('RoleRepository'),
+
+    // ** COMPANY
+
+    CompanyDataMapper: Symbol('CompanyDataMapper'),
+
+    CompanyApplication: Symbol('CompanyApplication'),
+
+    CompanyRepository: Symbol('CompanyRepository'),
+
+    // ** DEPARTMENT
+
+    DepartmentDataMapper: Symbol('DepartmentDataMapper'),
+
+    DepartmentApplication: Symbol('DepartmentApplication'),
+
+    DepartmentRepository: Symbol('DepartmentRepository'),
+
+    // ** MEMBERSHIP
+
+    MembershipDataMapper: Symbol('MembershipDataMapper'),
+
+    MembershipApplication: Symbol('MembershipApplication'),
+
+    MembershipRepository: Symbol('MembershipRepository')
+
+
+
+
+
+
+
     
 }

@@ -1,35 +1,16 @@
 import {Action, createAction, props} from "@ngrx/store"
 import { SuccessResponse, SuccessResponseTeste } from "../../models/successResponse";
-import { AuthResponse, CreateUserData, LoggedUser, LoginUserData } from "../../models/auth.model";
+import { AuthResponse, CreateUserData, LoggedUser, LoggedUserInfo, LoginUserData } from "../../models/auth.model";
 import { error } from "console";
 
-export const loginRequested = createAction(
-    '[Auth] Login Requested',
-    props<{ credentials: LoginUserData }>()
-  );
-  
-  export const loginSuccess = createAction(
-    '[Auth] Login Success',
-    props<{ response: AuthResponse }>()
-  );
-  
-  export const loginFailure = createAction(
-    '[Auth] Login Failure',
-    props<{ error: string }>()
-  );
-  
-  // **Signup Actions**
-  export const signupRequested = createAction(
-    '[Auth] Signup Requested',
-    props<{ userData: CreateUserData }>()
-  );
-  
-  export const signupSuccess = createAction(
-    '[Auth] Signup Success',
-    props<{ response: AuthResponse }>()
-  );
-  
-  export const signupFailure = createAction(
-    '[Auth] Signup Failure',
-    props<{ error: string }>()
-  );
+export const loadUser = createAction('[Auth] Load User');
+
+export const loadUserSuccess = createAction(
+  '[Auth] Load User Success',
+  props<{ user: LoggedUserInfo }>()
+);
+
+export const loadUserFailure = createAction(
+  '[Auth] Load User Failure',
+  props<{ error: any }>()
+);

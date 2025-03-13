@@ -20,14 +20,12 @@ export class CustomButtonComponent {
     @Input() hoverTextColor: string = 'hover:text-white'; 
     @Input() additionalClasses: string = ''; 
     @Input() link?: string;
-    @Input() onClick?: (() => void) | null = null 
+    //@Input() onClick?: (() => void) | null = null 
 
+    @Input() onClick: () => void = () => {}; // Provide default empty function
 
-    handleClick(): void {
-        if (this.onClick) {
-          this.onClick();  // Call the provided function
-        } else {
-          console.error('onClick is not provided or is null.');
-        }
-      }
+    handleClick(event: MouseEvent): void {
+        event.preventDefault(); // Move preventDefault here
+        this.onClick();
+    }
 }

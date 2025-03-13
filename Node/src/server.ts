@@ -23,8 +23,11 @@ process.on("uncaughtExceptionMonitor", (err: any) => {
 
 // server.ts
 import 'module-alias/register';
+
 import * as dotenv from 'dotenv';
-dotenv.config();
+const env = process.env.NODE_ENV || 'development'
+dotenv.config({path: `.env.${env}`});
+
 import 'reflect-metadata';
 import { initialise } from './app';
 import config from "./config/main"

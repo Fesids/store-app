@@ -26,7 +26,7 @@ import { infraestructureContainerModule } from './infra/container';
 
 // Rate limit middleware
 const limiter = expressRateLimit({
-  max:225,
+  max: 450,
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests.',
   standardHeaders: true,

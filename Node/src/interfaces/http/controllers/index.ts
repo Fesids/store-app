@@ -5,3 +5,6 @@ export * from './TaskController';
 export * from './CommonController';
 export * from './AttachController';
 export * from './RoleController';
+export * from './CompanyController';
+export * from './DepartmentController';
+export * from './MembershipController';

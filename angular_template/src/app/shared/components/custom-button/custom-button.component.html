@@ -23,7 +23,7 @@
 </a>
 
 
-<button *ngIf="!link" (click)="handleClick()" 
+<button *ngIf="!link" (click)="handleClick($event)" 
         class="p-2 border border-slate-200 rounded-md inline-flex space-x-1 items-center 
                {{ bgColor }} {{ hoverBgColor }} {{ textColor }} {{ hoverTextColor }} {{ additionalClasses }}">
   <span *ngIf="iconSvg" [innerHTML]="iconSvg"></span>

@@ -8,7 +8,9 @@ interface JwtPayloadExtended extends JwtPayload {
     firstName: string;
     lastName: string;
     email: string;
-    roles: Array<string>
+    roles: Array<string>,
+    companyId: string,
+    departmentId: Array<string>
 }
 
 const validate = {
@@ -49,7 +51,9 @@ const getJwtToken = (jwtPayload: JwtPayloadExtended): string => {
             firstName: jwtPayload.firstName,
             lastName: jwtPayload.lastName,
             email: jwtPayload.email,
-            roles: jwtPayload.roles
+            roles: jwtPayload.roles,
+            companyId: jwtPayload.companyId,
+            departmentId: jwtPayload.departmentId
         
         },
         config.JWT_SECRET as string,

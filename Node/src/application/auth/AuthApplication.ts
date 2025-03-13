@@ -8,6 +8,7 @@ import { AppError } from "../../interfaces/http/middlewares/ErrorHandler";
 import { UserDto } from "../user/dtos/UserDto";
 import { getHashPassword, verifyUserPassword, JwtPayloadExtended, getJwtToken, saveCookie } from "../../shared/authenticationUtil";
 import { IRoleRepository } from "../../domain/role/IRoleRepository";
+import { IMembershipRepository } from "../../domain/membership/IMembershipRepository";
 
 
 @injectable()
@@ -17,7 +18,10 @@ export class AuthApplication {
         private readonly userRepository: IUserRepository,
 
         @inject(TYPES.RoleRepository)
-        private readonly roleRepository: IRoleRepository
+        private readonly roleRepository: IRoleRepository,
+
+        @inject(TYPES.MembershipRepository)
+        private readonly membershipRepository: IMembershipRepository
     ){}
 
     async signUpUser(data: SignUpDto): Promise<void> {
@@ -29,7 +33,8 @@ export class AuthApplication {
           
           const hashPass = await getHashPassword(password);
       
-         
+          console.log(hashPass)
+          
           const userExists = await this.userRepository.findOneByParam({ email: email });
           if (userExists) throw new AppError(`User with ${email} already exists`, 404);
       
@@ -86,13 +91,17 @@ export class AuthApplication {
 
         if(!authCheck) throw new AppError(`Password didn't match`, 404);
 
+        const membershipInfo = await this.membershipRepository.findOneByParam({"userId": user.guid})
+
+       
         const jwtPayload: JwtPayloadExtended = {
             guid: user.guid,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            firstName: user.firstname,
+            lastName: user.lastname,
             email: user.email,
-            roles: user.roles
-
+            roles: user.roles,
+            companyId: membershipInfo.companyId,
+            departmentId: membershipInfo.departmentId
         };
 
         const token = getJwtToken(jwtPayload);

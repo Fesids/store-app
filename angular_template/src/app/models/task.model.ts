@@ -7,6 +7,7 @@ export interface TaskModel {
     employees: Array<string>,
     createdBy: Array<string>,
     departments: Array<string>,
+    departmentNames?: Array<string>,
     createdAt: Date,
     updatedAt: Date,
 }

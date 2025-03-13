@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "template": {
+    "store-app-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/template",
+            "outputPath": "dist/store-app-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -32,15 +32,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-               "node_modules/font-awesome/css/font-awesome.min.css"
+              "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -52,8 +46,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "10kB",
+                  "maximumError": "50kB"
                 }
               ],
               "outputHashing": "all"
@@ -70,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "template:build:production"
+              "buildTarget": "store-app-frontend:build:production"
             },
             "development": {
-              "buildTarget": "template:build:development"
+              "buildTarget": "store-app-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"

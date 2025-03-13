@@ -5,9 +5,9 @@ import { provideStore, Store } from "@ngrx/store";
 import { AppState } from "../../store/states/app.state";
 import { Router } from "@angular/router";
 import { reducers, metaReducers } from "../../store/reducers";
-import { AuthEffects } from "../../store/effects/auth.effect";
+import { authEffects } from "../../store/effects/auth.effect";
 import { provideEffects } from "@ngrx/effects"
-import { signupRequested } from "../../store/actions/auth.action";
+//import { signupRequested } from "../../store/actions/auth.action";
 import { AuthService } from "../../services/auth.service";
 import { tap } from "rxjs";
 import { PageTitleComponent } from "../../shared/components/page-title/page-title.component";

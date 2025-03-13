@@ -13,7 +13,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   standalone: true,
   templateUrl: './attachments-page.component.html',
   styleUrls: ['./attachments-page.component.scss'],
-  imports: [HeaderComponent, RedirectButton, AttachmentsListComponent, CustomButtonComponent]
+  imports: [HeaderComponent,  AttachmentsListComponent, CustomButtonComponent]
 })
 export class TaskAttachmentsPageComponent implements OnInit {
   taskId: string | null = null;
